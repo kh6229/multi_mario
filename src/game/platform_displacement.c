@@ -11,11 +11,12 @@
 #include "sm64.h"
 #include "behavior_data.h"
 #include "game_init.h"
+#include "mario_coop.h"
 
 #include "config.h"
 
-struct Object *gMarioPlatform = NULL;
-static struct PlatformDisplacementInfo sMarioDisplacementInfo;
+struct Object *gMarioPlatform[COOP_MARIO_STATES_MAX] = {NULL};
+static struct PlatformDisplacementInfo sMarioDisplacementInfo[COOP_MARIO_STATES_MAX];
 static Vec3f sMarioAmountDisplaced;
 
 /**
@@ -28,37 +29,41 @@ void update_mario_platform(void) {
     f32 floorHeight;
     u32 awayFromFloor;
 
-    if (gMarioObject == NULL) {
-        return;
-    }
-
     //! If Mario moves onto a rotating platform in a PU, the find_floor call
     //  will detect the platform and he will end up receiving a large amount
     //  of displacement since he is considered to be far from the platform's
     //  axis of rotation.
 
-    marioX = gMarioObject->oPosX;
-    marioY = gMarioObject->oPosY;
-    marioZ = gMarioObject->oPosZ;
-    floorHeight = find_floor(marioX, marioY, marioZ, &floor);
+    for (int i = 0; i < COOP_MARIO_STATES_MAX; i++) {
 
-    awayFromFloor =  absf(marioY - floorHeight) >= 4.0f;
+        if (gMarioStates[i].marioObj == NULL) {
+            continue;
+        }
 
-    if (awayFromFloor) {
-        gMarioPlatform = NULL;
-        gMarioObject->platform = NULL;
-    } else {
-        if (floor != NULL && floor->object != NULL) {
-            gMarioPlatform = floor->object;
-            gMarioObject->platform = floor->object;
-            // If this is the first frame of Mario standing on the platform,
-            // then initialise his platform displacement info struct
-            if ((floor->object != sMarioDisplacementInfo.prevPlatform) || (gGlobalTimer != sMarioDisplacementInfo.prevTimer)) {
-                update_platform_displacement_info(&sMarioDisplacementInfo, gMarioState->pos, gMarioState->faceAngle[1], floor->object);
-            }
+        struct Object * marioobj = gMarioStates[i].marioObj;
+        marioX = marioobj->oPosX;
+        marioY = marioobj->oPosY;
+        marioZ = marioobj->oPosZ;
+        floorHeight = find_floor(marioX, marioY, marioZ, &floor);
+
+        awayFromFloor =  absf(marioY - floorHeight) >= 4.0f;
+
+        if (awayFromFloor) {
+            gMarioPlatform[i] = NULL;
+            marioobj->platform = NULL;
         } else {
-            gMarioPlatform = NULL;
-            gMarioObject->platform = NULL;
+            if (floor != NULL && floor->object != NULL) {
+                gMarioPlatform[i] = floor->object;
+                marioobj->platform = floor->object;
+                // If this is the first frame of Mario standing on the platform,
+                // then initialise his platform displacement info struct
+                if ((floor->object != sMarioDisplacementInfo[i].prevPlatform) || (gGlobalTimer != sMarioDisplacementInfo[i].prevTimer)) {
+                    update_platform_displacement_info(&sMarioDisplacementInfo[i], gMarioState->pos, gMarioState->faceAngle[1], floor->object);
+                }
+            } else {
+                gMarioPlatform[i] = NULL;
+                marioobj->platform = NULL;
+            }
         }
     }
 }
@@ -178,15 +183,17 @@ static void apply_mario_inertia(void) {
 void apply_mario_platform_displacement(void) {
     struct Object *platform;
 
-    platform = gMarioPlatform;
-    if (!(gTimeStopState & TIME_STOP_ACTIVE) && gMarioObject != NULL) {
-        if (platform != NULL) {
-            apply_platform_displacement(&sMarioDisplacementInfo, gMarioState->pos, &gMarioState->faceAngle[1], platform);
-            sShouldApplyInertia = TRUE;
-            sInertiaFirstFrame = TRUE;
-        } else if (sShouldApplyInertia && gDoInertia) {
-            apply_mario_inertia();
-            sInertiaFirstFrame = FALSE;
+    for (int i = 0; i < COOP_MARIO_STATES_MAX; i++) {
+        platform = gMarioPlatform[i];
+        if (!(gTimeStopState & TIME_STOP_ACTIVE) && gMarioObject != NULL) {
+            if (platform != NULL) {
+                apply_platform_displacement(&sMarioDisplacementInfo[i], gMarioStates[i].pos, &gMarioStates[i].faceAngle[1], platform);
+                sShouldApplyInertia = TRUE;
+                sInertiaFirstFrame = TRUE;
+            } else if (sShouldApplyInertia && gDoInertia) {
+                //apply_mario_inertia();
+                sInertiaFirstFrame = FALSE;
+            }
         }
     }
 }
@@ -195,5 +202,6 @@ void apply_mario_platform_displacement(void) {
  * Set Mario's platform to NULL.
  */
 void clear_mario_platform(void) {
-    gMarioPlatform = NULL;
+    gMarioPlatform[0] = NULL;
+    gMarioPlatform[1] = NULL;
 }

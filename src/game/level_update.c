@@ -32,6 +32,7 @@
 #include "puppyprint.h"
 #include "level_commands.h"
 #include "debug.h"
+#include "mario_coop.h"
 
 #include "config.h"
 
@@ -129,7 +130,7 @@ struct CreditsEntry sCreditsSequence[] = {
     { LEVEL_NONE, 0, 1, 0, { 0, 0, 0 }, NULL },
 };
 
-struct MarioState gMarioStates[1];
+struct MarioState gMarioStates[COOP_MARIO_STATES_MAX];
 struct HudDisplay gHudDisplay;
 s16 sCurrPlayMode;
 s16 sTransitionTimer;
@@ -378,7 +379,7 @@ void init_mario_after_warp(void) {
             load_mario_area();
         }
 
-        init_mario();
+        init_mario(gMarioState);
         set_mario_initial_action(gMarioState, marioSpawnType, sWarpDest.arg);
 
         gMarioState->interactObj = object;
@@ -509,7 +510,7 @@ void warp_credits(void) {
     gPlayerSpawnInfos[0].areaIndex = sWarpDest.areaIdx;
 
     load_mario_area();
-    init_mario();
+    init_mario(gMarioState);
 
     set_mario_action(gMarioState, marioAction, 0);
 
@@ -723,6 +724,13 @@ void initiate_painting_warp(void) {
  */
 s16 level_trigger_warp(struct MarioState *m, s32 warpOp) {
     s32 fadeMusic = TRUE;
+
+    if (warpOp == WARP_OP_DEATH) {
+        // I think i could && with short circut eval but just to be safe I won't, gcc be like pmo idgaf
+        if (coop_delete_mario(m)) {
+            return 0;
+        }
+    }
 
     if (sDelayedWarpOp == WARP_OP_NONE) {
         m->invincTimer = -1;
@@ -1235,6 +1243,7 @@ s32 init_level(void) {
     OSTime first = osGetTime();
 #endif
 
+    coop_reset_state();
     set_play_mode(PLAY_MODE_NORMAL);
 
     sDelayedWarpOp = WARP_OP_NONE;
@@ -1270,7 +1279,7 @@ s32 init_level(void) {
     } else {
         if (gPlayerSpawnInfos[0].areaIndex >= 0) {
             load_mario_area();
-            init_mario();
+            init_mario(gMarioState);
         }
 
         if (gCurrentArea != NULL) {
@@ -1368,7 +1377,7 @@ s32 lvl_init_from_save_file(UNUSED s16 initOrUpdate, s32 levelNum) {
     gCurrCreditsEntry = NULL;
     gSpecialTripleJump = FALSE;
 
-    init_mario_from_save_file();
+    init_mario_from_save_file(gMarioState,0);
     disable_warp_checkpoint();
     save_file_move_cap_to_default_location();
     select_mario_cam_mode();

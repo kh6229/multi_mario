@@ -1779,6 +1779,8 @@ u32 check_npc_talk(struct MarioState *m, struct Object *obj) {
 }
 
 u32 interact_text(struct MarioState *m, UNUSED u32 interactType, struct Object *obj) {
+    if (m != gMarioState) {return FALSE;}
+
     u32 interact = FALSE;
 
     if (obj->oInteractionSubtype & INT_SUBTYPE_SIGN) {
@@ -1860,8 +1862,10 @@ void mario_process_interactions(struct MarioState *m) {
 
 void check_death_barrier(struct MarioState *m) {
     if (m->pos[1] < m->floorHeight + 2048.0f) {
-        if (level_trigger_warp(m, WARP_OP_WARP_FLOOR) == 20 && !(m->flags & MARIO_FALL_SOUND_PLAYED)) {
-            play_sound(SOUND_MARIO_WAAAOOOW, m->marioObj->header.gfx.cameraToObject);
+        if (!coop_delete_mario(m)) {
+            if (level_trigger_warp(m, WARP_OP_WARP_FLOOR) == 20 && !(m->flags & MARIO_FALL_SOUND_PLAYED)) {
+                play_sound(SOUND_MARIO_WAAAOOOW, m->marioObj->header.gfx.cameraToObject);
+            }
         }
     }
 }

@@ -217,20 +217,14 @@ struct ParticleProperties sParticleTypes[] = {
  * Copy position, velocity, and angle variables from MarioState to the Mario
  * object.
  */
-void copy_mario_state_to_object(void) {
-    s32 i = 0;
-    // L is real
-    if (gCurrentObject != gMarioObject) {
-        i++;
-    }
+void copy_mario_state_to_object(struct MarioState *m) {
+    gCurrentObject->oVelX = m->vel[0];
+    gCurrentObject->oVelY = m->vel[1];
+    gCurrentObject->oVelZ = m->vel[2];
 
-    gCurrentObject->oVelX = gMarioStates[i].vel[0];
-    gCurrentObject->oVelY = gMarioStates[i].vel[1];
-    gCurrentObject->oVelZ = gMarioStates[i].vel[2];
-
-    gCurrentObject->oPosX = gMarioStates[i].pos[0];
-    gCurrentObject->oPosY = gMarioStates[i].pos[1];
-    gCurrentObject->oPosZ = gMarioStates[i].pos[2];
+    gCurrentObject->oPosX = m->pos[0];
+    gCurrentObject->oPosY = m->pos[1];
+    gCurrentObject->oPosZ = m->pos[2];
 
     gCurrentObject->oMoveAnglePitch = gCurrentObject->header.gfx.angle[0];
     gCurrentObject->oMoveAngleYaw = gCurrentObject->header.gfx.angle[1];
@@ -240,9 +234,9 @@ void copy_mario_state_to_object(void) {
     gCurrentObject->oFaceAngleYaw = gCurrentObject->header.gfx.angle[1];
     gCurrentObject->oFaceAngleRoll = gCurrentObject->header.gfx.angle[2];
 
-    gCurrentObject->oAngleVelPitch = gMarioStates[i].angleVel[0];
-    gCurrentObject->oAngleVelYaw = gMarioStates[i].angleVel[1];
-    gCurrentObject->oAngleVelRoll = gMarioStates[i].angleVel[2];
+    gCurrentObject->oAngleVelPitch = m->angleVel[0];
+    gCurrentObject->oAngleVelYaw = m->angleVel[1];
+    gCurrentObject->oAngleVelRoll = m->angleVel[2];
 }
 
 /**
@@ -264,12 +258,14 @@ void bhv_mario_update(void) {
     u32 particleFlags = 0;
     s32 i;
 
-    particleFlags = execute_mario_action(gCurrentObject);
+    struct MarioState * m = &gMarioStates[gCurrentObject->oPlayerID];
+
+    particleFlags = execute_mario_action(m);
     gCurrentObject->oMarioParticleFlags = particleFlags;
 
     // Mario code updates MarioState's versions of position etc, so we need
     // to sync it with the Mario object
-    copy_mario_state_to_object();
+    copy_mario_state_to_object(m);
 
     i = 0;
     while (sParticleTypes[i].particleFlag != 0) {
@@ -387,6 +383,10 @@ s32 unload_deactivated_objects_in_list(struct ObjectNode *objList) {
                 set_object_respawn_info_bits(gCurrentObject, RESPAWN_INFO_DONT_RESPAWN);
             }
 
+            if (obj_has_behavior(gCurrentObject,bhvMario)) {
+                gMarioStates[gCurrentObject->oPlayerID].marioObj = NULL;
+            }
+
             unload_object(gCurrentObject);
         }
     }
@@ -488,6 +488,7 @@ void spawn_objects_from_info(UNUSED s32 unused, struct SpawnInfo *spawnInfo) {
             // This change allows any object to use that param
             if (object->behavior == segmented_to_virtual(bhvMario)) {
                 gMarioObject = object;
+                gMarioState->marioObj = object;
                 geo_make_first_child(&object->header.gfx.node);
             }
 

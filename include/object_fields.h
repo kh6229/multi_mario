@@ -198,6 +198,7 @@
 #define /*0x110*/ oMarioLongJumpIsSlow   OBJECT_FIELD_S32(0x22)
 #define /*0x110*/ oMarioSteepJumpYaw     OBJECT_FIELD_S32(0x22)
 #define /*0x110*/ oMarioWalkingPitch     OBJECT_FIELD_S32(0x22)
+#define /*0x110*/ oPlayerID              OBJECT_FIELD_S16(0x1C, 0)
 
 /* 1-Up Hidden */
 #define /*0x0F4*/ o1UpHiddenTimesTriggered                      OBJECT_FIELD_S32(0x1B)

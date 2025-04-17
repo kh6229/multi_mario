@@ -15,6 +15,8 @@
 #include "surface_load.h"
 #include "game/puppyprint.h"
 #include "game/debug.h"
+#include "game/level_update.h"
+#include "game/mario_coop.h"
 
 #include "config.h"
 
@@ -680,10 +682,16 @@ void load_object_collision_model(void) {
     TerrainData *collisionData = o->collisionData;
 
     Vec3f dist;
-    vec3_diff(dist, &o->oPosVec, &gMarioObject->oPosVec);
-    f32 sqrLateralDist = sqr(dist[0]) + sqr(dist[2]);
+    f32 sqrLateralDist;
+    for (int i = 0; i < COOP_MARIO_STATES_MAX; i++) {
+        if (gMarioStates[i].marioObj == NULL) {continue;}
 
-    f32 verticalMarioDiff = gMarioObject->oPosY - o->oPosY;
+        vec3_diff(dist, &o->oPosVec, gMarioStates[i].pos);
+        f32 compareSqrLatDist = sqr(dist[0]) + sqr(dist[2]) + sqr(dist[1]);
+        if (sqrLateralDist > compareSqrLatDist) {
+            sqrLateralDist = compareSqrLatDist;
+        }
+    }
 
 #ifdef AUTO_COLLISION_DISTANCE
     if (!(o->oFlags & OBJ_FLAG_DONT_CALC_COLL_DIST)) {
@@ -699,8 +707,6 @@ void load_object_collision_model(void) {
     
     s32 inColRadius = (
            (sqrLateralDist < sqr(o->oCollisionDistance))
-        && (verticalMarioDiff > 0 || verticalMarioDiff > -o->oCollisionDistance)
-        && (verticalMarioDiff < 0 || verticalMarioDiff < o->oCollisionDistance + 2000.f)
     );
 
     // Update if no Time Stop, in range, and in the current room.

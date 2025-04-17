@@ -389,6 +389,13 @@ void play_transition_after_delay(s16 transType, s16 time, u8 red, u8 green, u8 b
 }
 
 void render_game(void) {
+    if (gPlayer1Controller->buttonPressed & L_TRIG) {
+        coop_give_control_to_next();
+    }
+    if (gPlayer1Controller->buttonPressed & U_JPAD) {
+        coop_spawn_mario(gMarioStates->pos);
+    }
+
     PROFILER_GET_SNAPSHOT_TYPE(PROFILER_DELTA_COLLISION);
     if (gCurrentArea != NULL && !gWarpTransition.pauseRendering) {
         if (gCurrentArea->graphNode) {

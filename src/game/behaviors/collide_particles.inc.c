@@ -10,7 +10,7 @@ void bhv_punch_tiny_triangle_loop(void) {
     if (o->oTimer == 0) {
         s16 yaw = o->oMoveAngleYaw;
         o->oCollisionParticleScale = 1.28f;
-        cur_obj_set_pos_relative(gMarioObject, 0.0f, 60.0f, 100.0f);
+        cur_obj_set_pos_relative(o->parentObj, 0.0f, 60.0f, 100.0f);
         o->oMoveAngleYaw = yaw;
     }
 
@@ -30,7 +30,7 @@ void bhv_punch_tiny_triangle_init(void) {
 
     for (i = 0; i < 6; i++) {
         triangle = spawn_object(o, MODEL_DIRT_ANIMATION, bhvPunchTinyTriangle);
-        triangle->oMoveAngleYaw = gMarioObject->oMoveAngleYaw + sTinyTriMovementParams[2 * i] + 0x8000;
+        triangle->oMoveAngleYaw = o->parentObj->oMoveAngleYaw + sTinyTriMovementParams[2 * i] + 0x8000;
         triangle->oVelY = sins(sTinyTriMovementParams[2 * i + 1]) * 25.0f;
         triangle->oForwardVel = coss(sTinyTriMovementParams[2 * i + 1]) * 25.0f;
     }
@@ -40,7 +40,7 @@ void bhv_wall_tiny_star_particle_loop(void) {
     if (o->oTimer == 0) {
         s16 yaw = o->oMoveAngleYaw;
         o->oCollisionParticleScale = 0.28f;
-        cur_obj_set_pos_relative(gMarioObject, 0.0f, 30.0f, 110.0f);
+        cur_obj_set_pos_relative(o->parentObj, 0.0f, 30.0f, 110.0f);
         o->oMoveAngleYaw = yaw;
     }
 
@@ -56,7 +56,7 @@ void bhv_tiny_star_particles_init(void) {
 
     for (i = 0; i < 7; i++) {
         particle = spawn_object(o, MODEL_CARTOON_STAR, bhvWallTinyStarParticle);
-        particle->oMoveAngleYaw = gMarioObject->oMoveAngleYaw + sTinyStarMovementParams[2 * i] + 0x8000;
+        particle->oMoveAngleYaw = o->parentObj->oMoveAngleYaw + sTinyStarMovementParams[2 * i] + 0x8000;
         particle->oVelY = sins(sTinyStarMovementParams[2 * i + 1]) * 25.0f;
         particle->oForwardVel = coss(sTinyStarMovementParams[2 * i + 1]) * 25.0f;
     }

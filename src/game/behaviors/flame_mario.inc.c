@@ -19,9 +19,9 @@ void bhv_black_smoke_bowser_loop(void) {
 
 void bhv_black_smoke_mario_loop(void) {
     if (o->oTimer == 0) {
-        cur_obj_set_pos_relative(gMarioObject, 0, 0, -30.0f);
+        cur_obj_set_pos_relative(o->parentObj, 0, 0, -30.0f);
         o->oForwardVel = random_float() * 2 + 0.5f;
-        o->oMoveAngleYaw = (gMarioObject->oMoveAngleYaw + 0x7000) + random_float() * 8192.0f;
+        o->oMoveAngleYaw = (o->parentObj->oMoveAngleYaw + 0x7000) + random_float() * 8192.0f;
         o->oVelY = 8.0f;
     }
 
@@ -40,15 +40,16 @@ void bhv_flame_mario_loop(void) {
     cur_obj_scale(2.0f);
 
     if (o->oTimer & 1) {
-        spawn_object(o, MODEL_BURN_SMOKE, bhvBlackSmokeMario);
+        struct Object * burn_smoke = spawn_object(o, MODEL_BURN_SMOKE, bhvBlackSmokeMario);
+        burn_smoke->parentObj = o->parentObj;
     }
 
-    gMarioObject->prevObj = o; // weird?
+    o->parentObj->prevObj = o; // weird?
     obj_set_parent_relative_pos(o, 40, -120, 0);
 
-    if (!(gMarioObject->oMarioParticleFlags & ACTIVE_PARTICLE_FIRE)) {
+    if (!(o->parentObj->oMarioParticleFlags & ACTIVE_PARTICLE_FIRE)) {
         o->parentObj->oActiveParticleFlags &= ~ACTIVE_PARTICLE_FIRE;
         obj_mark_for_deletion(o);
-        gMarioObject->prevObj = NULL;
+        o->parentObj->prevObj = NULL;
     }
 }
