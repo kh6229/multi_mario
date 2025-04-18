@@ -26,6 +26,7 @@
 #include "debug_box.h"
 #include "engine/colors.h"
 #include "profiling.h"
+#include "mario_coop.h"
 #ifdef S2DEX_TEXT_ENGINE
 #include "s2d_engine/init.h"
 #endif
@@ -389,12 +390,17 @@ void play_transition_after_delay(s16 transType, s16 time, u8 red, u8 green, u8 b
 }
 
 void render_game(void) {
-    if (gPlayer1Controller->buttonPressed & L_TRIG) {
-        coop_give_control_to_next();
+    if (COOP_CONTROL_MODE == COOP_CM_ALL_ACTIVE || COOP_CONTROL_MODE == COOP_CM_TAKE_TURNS) {
+        if (((gMarioState->action & ACT_GROUP_MASK) != ACT_GROUP_CUTSCENE) && (gPlayer1Controller->buttonPressed & L_TRIG)) {
+            coop_give_control_to_next();
+        }
     }
-    if (gPlayer1Controller->buttonPressed & U_JPAD) {
-        coop_spawn_mario(gMarioStates->pos);
+
+    #ifdef COOP_DEBUG_SPAWN_MARIO_WITH_DDOWN
+    if (gPlayer1Controller->buttonPressed & D_JPAD) {
+        coop_spawn_mario(gMarioState->pos);
     }
+    #endif
 
     PROFILER_GET_SNAPSHOT_TYPE(PROFILER_DELTA_COLLISION);
     if (gCurrentArea != NULL && !gWarpTransition.pauseRendering) {

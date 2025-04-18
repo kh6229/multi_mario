@@ -29,7 +29,7 @@ void bhv_controllable_platform_sub_loop(void) {
                 break;
             }
 
-            if (gMarioObject->platform == o) {
+            if (is_a_mario_on_platform()) {
                 sControllablePlatformDirectionState = o->oBehParams2ndByte;
                 o->parentObj->header.gfx.node.flags &= ~GRAPH_RENDER_INVISIBLE;
                 o->oAction = 1;
@@ -139,7 +139,7 @@ void controllable_platform_tilt_from_mario(void) {
     s16 dx = gMarioObject->header.gfx.pos[0] - o->oPosX;
     s16 dz = gMarioObject->header.gfx.pos[2] - o->oPosZ;
 
-    if (gMarioObject->platform == o
+    if (is_a_mario_on_platform()
         || gMarioObject->platform == cur_obj_nearest_object_with_behavior(bhvControllablePlatformSub)) {
         o->oFaceAnglePitch = dz * 4;
         o->oFaceAngleRoll = -dx * 4;

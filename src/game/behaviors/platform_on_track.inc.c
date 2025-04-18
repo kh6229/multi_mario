@@ -194,7 +194,7 @@ static void platform_on_track_act_init(void) {
  * Wait for mario to stand on the platform for 20 frames, then begin moving.
  */
 static void platform_on_track_act_wait_for_mario(void) {
-    if (gMarioObject->platform == o) {
+    if (is_a_mario_on_platform()) {
         if (o->oTimer > 20) {
             o->oAction = PLATFORM_ON_TRACK_ACT_MOVE_ALONG_TRACK;
         }
@@ -244,7 +244,7 @@ static void platform_on_track_act_move_along_track(void) {
                 obj_forward_vel_approach(10.0, 0.1f);
             } else {
 #ifdef CONTROLLABLE_PLATFORM_SPEED
-                f32 targetVel = gMarioObject->platform == o
+                f32 targetVel = is_a_mario_on_platform()
                     ? (o->oDistanceToMario * coss(o->oAngleToMario - o->oMoveAngleYaw)) - 10.0f
                     : 10.0f;
                 if (targetVel < 10.0f) {
@@ -343,7 +343,7 @@ static void platform_on_track_rock_ski_lift(void) {
     o->oFaceAngleRoll += (s32) o->oPlatformOnTrackSkiLiftRollVel;
 
     // Tilt away from the moving direction and toward mario
-    if (gMarioObject->platform == o) {
+    if (is_a_mario_on_platform()) {
         targetRoll = o->oForwardVel * sins(o->oMoveAngleYaw) * -50.0f
                      + (s32)(o->oDistanceToMario * sins(o->oAngleToMario - o->oFaceAngleYaw) * -4.0f);
     }
@@ -385,7 +385,7 @@ void bhv_platform_on_track_update(void) {
     } else if (o->oPlatformOnTrackType == PLATFORM_ON_TRACK_TYPE_CARPET) {
 #ifdef CONTROLLABLE_PLATFORM_SPEED
         s16 targetRoll; // Visually, this is the platform's pitch, since these platforms technically move sideways
-        if (gMarioObject->platform == o) {
+        if (is_a_mario_on_platform()) {
             if (!o->oPlatformOnTrackWasStoodOn) {
                 o->oPlatformOnTrackOffsetY    = -8.0f;
                 o->oPlatformOnTrackWasStoodOn = TRUE;
@@ -397,7 +397,7 @@ void bhv_platform_on_track_update(void) {
         o->oFaceAngleRoll = approach_s32_symmetric(o->oFaceAngleRoll, targetRoll, 0x100);
 #else
 
-        if (!o->oPlatformOnTrackWasStoodOn && gMarioObject->platform == o) {
+        if (!o->oPlatformOnTrackWasStoodOn && is_a_mario_on_platform()) {
             o->oPlatformOnTrackOffsetY = -8.0f;
             o->oPlatformOnTrackWasStoodOn = TRUE;
         }

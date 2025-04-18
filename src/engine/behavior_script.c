@@ -1,6 +1,7 @@
 #include <ultra64.h>
 
 #include "sm64.h"
+#include "types.h"
 #include "behavior_data.h"
 #include "behavior_script.h"
 #include "game/area.h"
@@ -14,6 +15,8 @@
 #include "math_util.h"
 #include "graph_node.h"
 #include "surface_collision.h"
+#include "game/mario_coop.h"
+#include "game/level_update.h"
 
 // Macros for retrieving arguments from behavior scripts.
 #define BHV_CMD_GET_1ST_U8(index)     (u8)((gCurBhvCommand[index] >> 24) & 0xFF) // unused
@@ -828,7 +831,21 @@ void cur_obj_update(void) {
 
     // Calculate the distance from the object to Mario.
     if (objFlags & OBJ_FLAG_COMPUTE_DIST_TO_MARIO) {
-        o->oDistanceToMario = dist_between_objects(o, gMarioObject);
+        //o->oDistanceToMario = dist_between_objects(o, gMarioObject);
+
+        f32 sqrLateralDist = 99999999999999.0f;
+        Vec3f dist;
+        for (int i = 0; i < COOP_MARIO_STATES_MAX; i++) {
+            if (gMarioStates[i].marioObj == NULL) {continue;}
+    
+            vec3_diff(dist, &o->oPosVec, gMarioStates[i].pos);
+            f32 compareSqrLatDist = sqr(dist[0]) + sqr(dist[2]) + sqr(dist[1]);
+            if (sqrLateralDist > compareSqrLatDist) {
+                sqrLateralDist = compareSqrLatDist;
+            }
+        }
+
+        o->oDistanceToMario = sqrtf(sqrLateralDist);
         distanceFromMario = o->oDistanceToMario;
     } else {
         distanceFromMario = 0.0f;
@@ -836,7 +853,20 @@ void cur_obj_update(void) {
 
     // Calculate the angle from the object to Mario.
     if (objFlags & OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO) {
-        o->oAngleToMario = obj_angle_to_object(o, gMarioObject);
+        //o->oAngleToMario = obj_angle_to_object(o, gMarioObject);
+
+        f32 sqrLateralDist = 99999999999999.0f;
+        Vec3f dist;
+        for (int i = 0; i < COOP_MARIO_STATES_MAX; i++) {
+            if (gMarioStates[i].marioObj == NULL) {continue;}
+    
+            vec3_diff(dist, &o->oPosVec, gMarioStates[i].pos);
+            f32 compareSqrLatDist = sqr(dist[0]) + sqr(dist[2]) + sqr(dist[1]);
+            if (sqrLateralDist > compareSqrLatDist) {
+                sqrLateralDist = compareSqrLatDist;
+                o->oAngleToMario = obj_angle_to_object(o, gMarioStates[i].marioObj);
+            }
+        }
     }
 
     // If the object's action has changed, reset the action timer.

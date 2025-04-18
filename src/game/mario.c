@@ -1344,11 +1344,9 @@ void update_mario_inputs(struct MarioState *m) {
         update_mario_joystick_inputs(m);
     }
 
-    #if (COOP_CONTROL_MODE == COOP_CM_NPC)
-    if (gMarioState != m) {
+    if ((COOP_CONTROL_MODE == COOP_CM_NPC) && gMarioState != m) {
         coop_npc_behavior(m);
     }
-    #endif
 
     update_mario_geometry_inputs(m);
 #ifdef VANILLA_DEBUG
@@ -1356,7 +1354,7 @@ void update_mario_inputs(struct MarioState *m) {
 #endif
     if (gCameraMovementFlags & CAM_MOVE_C_UP_MODE) {
         if (m->action & ACT_FLAG_ALLOW_FIRST_PERSON) {
-            m->input |= INPUT_FIRST_PERSON;
+            //m->input |= INPUT_FIRST_PERSON;
         } else {
             gCameraMovementFlags &= ~CAM_MOVE_C_UP_MODE;
         }

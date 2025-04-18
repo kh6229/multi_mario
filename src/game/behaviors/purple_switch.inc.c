@@ -17,9 +17,9 @@ void bhv_purple_switch_loop(void) {
             cur_obj_set_model(MODEL_PURPLE_SWITCH);
             cur_obj_scale(1.5f);
             if (
-                gMarioObject->platform == o
+                is_a_mario_on_platform()
                 && !(gMarioStates[0].action & MARIO_NO_PURPLE_SWITCH)
-                && lateral_dist_between_objects(o, gMarioObject) < 127.5f
+                && o->oDistanceToMario < 127.5f
             ) {
                 o->oAction = PURPLE_SWITCH_ACT_PRESSED;
             }

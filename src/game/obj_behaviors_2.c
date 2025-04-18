@@ -45,6 +45,7 @@
 #include "save_file.h"
 #include "seq_ids.h"
 #include "spawn_sound.h"
+#include "mario_coop.h"
 
 //! TODO: remove static
 

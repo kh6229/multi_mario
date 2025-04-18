@@ -24,6 +24,7 @@
 #include "sound_init.h"
 #include "rumble_init.h"
 #include "config.h"
+#include "object_list_processor.h"
 
 u8  sDelayInvincTimer;
 s16 sInvulnerable;
@@ -764,6 +765,8 @@ u32 interact_water_ring(struct MarioState *m, UNUSED u32 interactType, struct Ob
 }
 
 u32 interact_star_or_key(struct MarioState *m, UNUSED u32 interactType, struct Object *obj) {
+    if (m != gMarioState) {gMarioState = m; gMarioObject = gMarioState->marioObj;}
+
     u32 starIndex;
     u32 starGrabAction = ACT_STAR_DANCE_EXIT;
 #ifdef NON_STOP_STARS

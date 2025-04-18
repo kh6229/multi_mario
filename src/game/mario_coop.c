@@ -67,6 +67,10 @@ void coop_give_control_to_next(void) {
 
     gMarioState=&gMarioStates[gCoopActiveMarioIndex];
     gMarioObject=gMarioStates[gCoopActiveMarioIndex].marioObj;
+
+    #ifdef COOP_SNAPPY_SWAP_CAMERA
+        reset_camera(gCurrentArea->camera);
+    #endif
 }
 
 
@@ -84,7 +88,7 @@ int coop_delete_mario(struct MarioState * m) {
     if (gCoopActiveMarios == 0) {
         return FALSE; // Returns FALSE (Game Over) when every Mario is dead.
     }
-    #if (COOP_MAIN_MARIO_MUST_LIVE == TRUE)
+    #ifdef COOP_MAIN_MARIO_MUST_LIVE
     if (m==gMarioState) {
         m->isDead = TRUE;
         return FALSE; // Returns FALSE (Game Over) when primary Mario has died.
@@ -100,7 +104,6 @@ int coop_delete_mario(struct MarioState * m) {
     return TRUE;
 }
 
-#if (COOP_CONTROL_MODE == COOP_CM_ALL_ACTIVE)
 void coop_npc_behavior(struct MarioState * m) {
     // Sample NPC function that makes Mario jump around like an idiot.
 
@@ -121,7 +124,6 @@ void coop_npc_behavior(struct MarioState * m) {
         m->input |= (INPUT_Z_DOWN|INPUT_Z_PRESSED); // 1/100 chance every frame to press Z
     }
 }
-#endif
 
 // Don't call this function yourself, used for level transitions
 void coop_reset_state(void) {

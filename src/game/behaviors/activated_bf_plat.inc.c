@@ -65,7 +65,7 @@ void bhv_activated_back_and_forth_platform_init(void) {
 void bhv_activated_back_and_forth_platform_update(void) {
     // oVelY is used for vertical platforms' movement and also for
     // horizontal platforms' dipping up/down when Mario gets on/off them
-    o->oVelY = (gMarioObject->platform == o) ? -6.0f : 6.0f;
+    o->oVelY = (is_a_mario_on_platform()) ? -6.0f : 6.0f;
 
     // If the platform's velocity is set...
     if (o->oActivatedBackAndForthPlatformVel != 0.0f) {

@@ -151,6 +151,7 @@ static u8 sInertiaFirstFrame = FALSE;
 /**
  * Apply inertia based on Mario's last platform.
  */
+/*
 static void apply_mario_inertia(void) {
 #ifdef MARIO_INERTIA_UPWARD
     // On the first frame of leaving the ground, boost Mario's y velocity
@@ -176,6 +177,7 @@ static void apply_mario_inertia(void) {
         sShouldApplyInertia = FALSE;
     }
 }
+*/
 
 /**
  * Apply platform displacement or inertia if required.

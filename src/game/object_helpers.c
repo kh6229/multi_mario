@@ -26,6 +26,7 @@
 #include "rendering_graph_node.h"
 #include "spawn_object.h"
 #include "spawn_sound.h"
+#include "mario_coop.h"
 
 static s32 clear_move_flag(u32 *bitSet, s32 flag);
 
@@ -1719,8 +1720,10 @@ s32 cur_obj_wait_then_blink(s32 timeUntilBlinking, s32 numBlinks) {
 }
 
 s32 cur_obj_is_mario_ground_pounding_platform(void) {
-    if (gMarioObject->platform == o) {
-        if (gMarioStates[0].action == ACT_GROUND_POUND_LAND) {
+    
+    for (int i = 0; i < COOP_MARIO_STATES_MAX; i++) {
+        struct MarioState * m = &gMarioStates[i];
+        if (m->marioObj != NULL && m->marioObj->platform == o && m->action == ACT_GROUND_POUND_LAND) {
             return TRUE;
         }
     }
@@ -2327,4 +2330,15 @@ void cur_obj_spawn_star_at_y_offset(f32 targetX, f32 targetY, f32 targetZ, f32 o
     o->oPosY += offsetY + gDebugInfo[DEBUG_PAGE_ENEMYINFO][0];
     spawn_default_star(targetX, targetY, targetZ);
     o->oPosY = objectPosY;
+}
+
+s32 is_a_mario_on_platform(void) {
+    for (int i = 0; i < COOP_MARIO_STATES_MAX; i++) {
+        struct MarioState * m = &gMarioStates[i];
+        if (m->marioObj != NULL && m->marioObj->platform == o) {
+            return TRUE;
+        }
+    }
+
+    return FALSE;
 }

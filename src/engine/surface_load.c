@@ -682,7 +682,7 @@ void load_object_collision_model(void) {
     TerrainData *collisionData = o->collisionData;
 
     Vec3f dist;
-    f32 sqrLateralDist;
+    f32 sqrLateralDist = 99999999999999.0f;
     for (int i = 0; i < COOP_MARIO_STATES_MAX; i++) {
         if (gMarioStates[i].marioObj == NULL) {continue;}
 

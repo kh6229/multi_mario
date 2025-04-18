@@ -23,7 +23,7 @@ void bhv_lll_rotating_hexagonal_ring_loop(void) {
 
     switch (o->oAction) {
         case 0:
-            if (gMarioObject->platform == o) {
+            if (is_a_mario_on_platform()) {
                 o->oAction++;
             }
 

@@ -64,7 +64,7 @@ void bhv_arrow_lift_loop(void) {
         case ARROW_LIFT_ACT_IDLE:
             // Wait 61 frames before moving.
             if (o->oTimer > 60) {
-                if (gMarioObject->platform == o) {
+                if (is_a_mario_on_platform()) {
                     o->oAction = ARROW_LIFT_ACT_MOVING_AWAY;
                 }
             }
