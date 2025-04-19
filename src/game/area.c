@@ -263,6 +263,8 @@ void unload_area(void) {
 }
 
 void load_mario_area(void) {
+    coop_reset_state();
+    
     stop_sounds_in_continuous_banks();
     load_area(gMarioSpawnInfo->areaIndex);
 
