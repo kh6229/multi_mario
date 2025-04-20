@@ -1,0 +1,10 @@
+extern const GeoLayout exampleSeesaw_geo[];
+extern Lights1 exampleSeesaw_wood_lights;
+extern u8 exampleSeesaw_bridge_ci8[];
+extern u8 exampleSeesaw_bridge_pal_rgba16[];
+extern Vtx exampleSeesaw_exampleSeesaw_mesh_layer_1_vtx_cull[8];
+extern Vtx exampleSeesaw_exampleSeesaw_mesh_layer_1_vtx_0[24];
+extern Gfx exampleSeesaw_exampleSeesaw_mesh_layer_1_tri_0[];
+extern Gfx mat_exampleSeesaw_wood[];
+extern Gfx mat_revert_exampleSeesaw_wood[];
+extern Gfx exampleSeesaw_exampleSeesaw_mesh_layer_1[];

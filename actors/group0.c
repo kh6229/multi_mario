@@ -30,3 +30,9 @@
 #include "src/s2d_engine/s2d_config.h"
 #include FONT_C_FILE
 #endif
+
+#include "exampleSeesaw/collision.inc.c"
+#include "exampleSeesaw/model.inc.c"
+#include "raisePlatform/collision.inc.c"
+#include "raisePlatform/model.inc.c"
+#include "doubleCherry/model.inc.c"

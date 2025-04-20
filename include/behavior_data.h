@@ -540,5 +540,11 @@ extern const BehaviorScript bhvEndBirds1[];
 extern const BehaviorScript bhvEndBirds2[];
 extern const BehaviorScript bhvIntroScene[];
 extern const BehaviorScript bhvUnusedFakeStar[];
+extern const BehaviorScript bhvSpawnCoopMario[];
+extern const BehaviorScript bhvWeightPlate[];
+extern const BehaviorScript bhvCountPlate[];
+extern const BehaviorScript bhvWeightPlateNumber[];
+extern const BehaviorScript bhvRaisePlatform[];
+extern const BehaviorScript bhvDoubleCherry[];
 
 #endif // BEHAVIOR_DATA_H

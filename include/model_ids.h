@@ -572,4 +572,9 @@
 #define MODEL_VCUTM_WARP_PIPE                     MODEL_LEVEL_GEOMETRY_16   // warp_pipe_geo
 #define MODEL_CASTLE_GROUNDS_WARP_PIPE            MODEL_LEVEL_GEOMETRY_16   // warp_pipe_geo
 
+// Coop objects
+#define MODEL_DOUBLE_CHERRY                       0xFD
+#define MODEL_EXAMPLE_SEESAW                      0xFE
+#define MODEL_RAISE_PLATFORM                      0xFF
+
 #endif // MODEL_IDS_H

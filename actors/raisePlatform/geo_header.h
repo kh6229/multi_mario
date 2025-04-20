@@ -1,0 +1,10 @@
+extern const GeoLayout raisePlatform_geo[];
+extern Lights1 raisePlatform_platform_lights;
+extern u8 raisePlatform_pressure_plate_ci8[];
+extern u8 raisePlatform_pressure_plate_pal_rgba16[];
+extern Vtx raisePlatform_raisePlatform_mesh_layer_1_vtx_cull[8];
+extern Vtx raisePlatform_raisePlatform_mesh_layer_1_vtx_0[24];
+extern Gfx raisePlatform_raisePlatform_mesh_layer_1_tri_0[];
+extern Gfx mat_raisePlatform_platform[];
+extern Gfx mat_revert_raisePlatform_platform[];
+extern Gfx raisePlatform_raisePlatform_mesh_layer_1[];

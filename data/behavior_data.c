@@ -6074,4 +6074,59 @@ const BehaviorScript bhvIntroScene[] = {
     END_LOOP(),
 };
 
+const BehaviorScript bhvSpawnCoopMario[] = {
+    BEGIN(OBJ_LIST_DEFAULT),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    CALL_NATIVE(bhv_coop_spawn_mario),
+    BEGIN_LOOP(),
+    END_LOOP(),
+};
 
+const BehaviorScript bhvWeightPlate[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    SCALE(/*Unused*/ 0, /*Field*/ 150),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    LOAD_COLLISION_DATA(purple_switch_seg8_collision_0800C7A8),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_coop_weight_plate),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
+
+const BehaviorScript bhvCountPlate[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    SCALE(/*Unused*/ 0, /*Field*/ 150),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    LOAD_COLLISION_DATA(purple_switch_seg8_collision_0800C7A8),
+    BEGIN_LOOP(),
+        //CALL_NATIVE(bhv_coop_weight_plate),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
+
+const BehaviorScript bhvWeightPlateNumber[] = {
+    BEGIN(OBJ_LIST_DEFAULT),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    BILLBOARD(),
+    BEGIN_LOOP(),
+    END_LOOP(),
+};
+
+const BehaviorScript bhvRaisePlatform[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    LOAD_COLLISION_DATA(raisePlatform_collision),
+    SET_HOME(),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_coop_raise_platform),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
+
+const BehaviorScript bhvDoubleCherry[] = {
+    BEGIN(OBJ_LIST_SURFACE), // Not a mistake, object order shenanigans to get rid of a camera bug
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_COMPUTE_DIST_TO_MARIO),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_coop_double_cherry),
+    END_LOOP(),
+};

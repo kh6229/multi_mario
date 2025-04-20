@@ -331,4 +331,14 @@ extern const Gfx white_particle_small_dl_end[];
 extern const Gfx white_particle_small_dl[];
 extern const Gfx white_particle_small_unused_dl[];
 
+#include "exampleSeesaw/collision_header.h"
+
+#include "exampleSeesaw/geo_header.h"
+
+#include "raisePlatform/collision_header.h"
+
+#include "raisePlatform/geo_header.h"
+
+#include "doubleCherry/geo_header.h"
+
 #endif
