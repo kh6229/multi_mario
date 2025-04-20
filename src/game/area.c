@@ -392,15 +392,13 @@ void play_transition_after_delay(s16 transType, s16 time, u8 red, u8 green, u8 b
 }
 
 void render_game(void) {
-    if (COOP_CONTROL_MODE == COOP_CM_ALL_ACTIVE || COOP_CONTROL_MODE == COOP_CM_TAKE_TURNS) {
-        if (((gMarioState->action & ACT_GROUP_MASK) != ACT_GROUP_CUTSCENE) && (gPlayer1Controller->buttonPressed & L_TRIG)) {
-            coop_give_control_to_next();
-        }
+    if (((gMarioState->action & ACT_GROUP_MASK) != ACT_GROUP_CUTSCENE) && (gPlayer1Controller->buttonPressed & L_TRIG)) {
+        coop_give_control_to_next();
     }
 
     #ifdef COOP_DEBUG_SPAWN_MARIO_WITH_DDOWN
     if (gPlayer1Controller->buttonPressed & D_JPAD) {
-        coop_spawn_mario(gMarioState->pos);
+        coop_spawn_mario(gMarioState->pos, COOP_DEBUG_MARIO_CONTROL_MODE);
     }
     #endif
 

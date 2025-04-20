@@ -19,21 +19,26 @@ Check mario_coop.h for configuration.
 */
 
 int gCoopActiveMarios = 1;
+int gCoopActiveControllableMarios = 1;
 int gCoopActiveMarioIndex = 0;
 
 /* 
 Spawns a Mario at the specified position with a specific player ID.
 Returns the MarioState of the spawned Mario, NULL if the ID is already used.
 */
-struct MarioState * coop_spawn_mario_with_id(Vec3f pos, int marioID) {
+struct MarioState * coop_spawn_mario_with_id(Vec3f pos, int marioID, int control_mode) {
     if (gMarioStates[marioID].marioObj != NULL) {return NULL;} // Slot already used
 
     gCoopActiveMarios++;
+    if (IS_CONTROLLABLE(control_mode)) {
+        gCoopActiveControllableMarios --;
+    }
 
     init_mario_from_save_file(&gMarioStates[marioID],marioID);
     gMarioStates[marioID].marioObj = spawn_object(gMarioState->marioObj, MODEL_MARIO, bhvMario);
     gMarioStates[marioID].marioObj->oPlayerID = marioID;
     init_mario(&gMarioStates[marioID]);
+    gMarioStates[marioID].controlMode = control_mode;
     vec3f_copy(gMarioStates[marioID].pos, pos);
     return &gMarioStates[marioID];
 }
@@ -42,11 +47,11 @@ struct MarioState * coop_spawn_mario_with_id(Vec3f pos, int marioID) {
 Spawns a Mario at the specified position using any empty ID.
 Returns the MarioState of the spawned Mario, NULL if Mario count is maxed out.
 */
-struct MarioState * coop_spawn_mario(Vec3f pos) {
+struct MarioState * coop_spawn_mario(Vec3f pos, int control_mode) {
     for (int i = 0; i < COOP_MARIO_STATES_MAX; i ++) {
         // Search for a uninitialized mario
         if (gMarioStates[i].marioObj == NULL) {
-            return coop_spawn_mario_with_id(pos,i);
+            return coop_spawn_mario_with_id(pos,i,control_mode);
         }
     }
 
@@ -54,8 +59,7 @@ struct MarioState * coop_spawn_mario(Vec3f pos) {
 }
 
 /*
-Sets the next Mario in line as the primary controller.
-In COOP_CM_ALL_ACTIVE, only determines camera focus.
+Sets the next Mario with control mode COOP_CM_TAKE_TURNS in line as the primary controller.
 */
 void coop_give_control_to_next(void) {
     do {
@@ -63,7 +67,7 @@ void coop_give_control_to_next(void) {
         if (gCoopActiveMarioIndex >= COOP_MARIO_STATES_MAX) {
             gCoopActiveMarioIndex = 0;
         }
-    } while(gMarioStates[gCoopActiveMarioIndex].marioObj == NULL);
+    } while(gMarioStates[gCoopActiveMarioIndex].marioObj == NULL || !IS_CONTROLLABLE(gMarioStates[gCoopActiveMarioIndex].controlMode));
 
     gMarioState=&gMarioStates[gCoopActiveMarioIndex];
     gMarioObject=gMarioStates[gCoopActiveMarioIndex].marioObj;
@@ -84,6 +88,9 @@ int coop_delete_mario(struct MarioState * m) {
         // marioObj is safely unplugged from MarioState when object is unloaded in unload_deactivated_objects_in_list() in object_list_processor.c
         obj_mark_for_deletion(m->marioObj);
         gCoopActiveMarios--;
+        if (IS_CONTROLLABLE(m->controlMode)) {
+            gCoopActiveControllableMarios --;
+        }
     }
     if (gCoopActiveMarios == 0) {
         return FALSE; // Returns FALSE (Game Over) when every Mario is dead.

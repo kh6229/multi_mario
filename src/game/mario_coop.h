@@ -4,13 +4,13 @@
 #define MARIO_COOP_H
 
 enum {
-    COOP_CM_TAKE_TURNS, // Player controls one Mario at a time, press L to change active Mario
-    COOP_CM_ALL_ACTIVE, // Player controls every Mario at once, press L to change Mario perspective
-    COOP_CM_NPC, // Player only controls Mario 0, other Marios use
+    COOP_CM_TAKE_TURNS, // Controllable by player when set as main Mario
+    COOP_CM_ALL_ACTIVE, // Controllable by player at all times
+    COOP_CM_NPC, // Acts on its own, has a programmable brain
     COOP_CM_CUSTOM // For custom programmed behavior
 };
-#define COOP_CONTROL_MODE COOP_CM_TAKE_TURNS
 
+#define COOP_DEBUG_MARIO_CONTROL_MODE COOP_CM_NPC // Default mode for debug Marios spawned with D-Down
 #define COOP_MARIO_HITBOX_SIZE 80.0f // For Mario vs. Mario collision
 
 #define COOP_MARIO_STATES_MAX 10 // Maximum amount of Marios allowed to be spawned at once
@@ -24,11 +24,13 @@ If the game freezes with music still playing from spawning too many Marios, try 
 #define COOP_DEBUG_SPAWN_MARIO_WITH_DDOWN // If defined, spawn Mario when pressing D-Pad down
 #define COOP_SNAPPY_SWAP_CAMERA // If defined, camera will swap instantly instead of gradually
 
+#define IS_CONTROLLABLE(controlMode) (controlMode == COOP_CM_TAKE_TURNS || controlMode == COOP_CM_ALL_ACTIVE)
+
 extern int gCoopActiveMarios;
 extern int gCoopActiveMarioIndex;
 
-struct MarioState * coop_spawn_mario_with_id(Vec3f pos, int marioID);
-struct MarioState * coop_spawn_mario(Vec3f pos);
+struct MarioState * coop_spawn_mario_with_id(Vec3f pos, int marioID, int control_mode);
+struct MarioState * coop_spawn_mario(Vec3f pos, int control_mode);
 void coop_give_control_to_next(void);
 int coop_delete_mario(struct MarioState * m);
 

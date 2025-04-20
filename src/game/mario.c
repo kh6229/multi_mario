@@ -1339,12 +1339,12 @@ void update_mario_inputs(struct MarioState *m) {
     }
 #endif
 
-    if (m == gMarioState || COOP_CONTROL_MODE == COOP_CM_ALL_ACTIVE) {
+    if (m == gMarioState || m->controlMode == COOP_CM_ALL_ACTIVE) {
         update_mario_button_inputs(m);
         update_mario_joystick_inputs(m);
     }
 
-    if ((COOP_CONTROL_MODE == COOP_CM_NPC) && gMarioState != m) {
+    if ((m->controlMode == COOP_CM_NPC) && gMarioState != m) {
         coop_npc_behavior(m);
     }
 
@@ -1879,6 +1879,8 @@ void init_mario(struct MarioState *m) {
         capObject->oForwardVel = 0;
         capObject->oMoveAngleYaw = 0;
     }
+
+    m->controlMode = COOP_CM_TAKE_TURNS;
 }
 
 void init_mario_from_save_file(struct MarioState *m, int playerId) {
