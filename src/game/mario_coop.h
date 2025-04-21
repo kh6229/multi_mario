@@ -10,7 +10,7 @@ enum {
     COOP_CM_CUSTOM // For custom programmed behavior
 };
 
-#define COOP_DEBUG_MARIO_CONTROL_MODE COOP_CM_NPC // Default mode for debug Marios spawned with D-Down
+#define COOP_DEBUG_MARIO_CONTROL_MODE COOP_CM_TAKE_TURNS // Default mode for debug Marios spawned with D-Down
 #define COOP_MARIO_HITBOX_SIZE 80.0f // For Mario vs. Mario collision
 
 #define COOP_MARIO_STATES_MAX 10 // Maximum amount of Marios allowed to be spawned at once
