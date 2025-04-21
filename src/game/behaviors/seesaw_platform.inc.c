@@ -40,40 +40,30 @@ void bhv_seesaw_platform_update(void) {
         cur_obj_play_sound_1(SOUND_ENV_BOAT_ROCKING1);
     }
 
-    int marioct = 0;
     for (int i = 0; i < COOP_MARIO_STATES_MAX; i++) {
         struct MarioState * m = &gMarioStates[i];
         if (m->marioObj != NULL && m->marioObj->platform == o) {
             // Rotate toward mario
-            f32 rotation = dist_between_objects(o,m->marioObj) * coss(obj_angle_to_object(o,m->marioObj) - o->oMoveAngleYaw);
-            rotation *= 0.04f;
-
-            /*
-            // Deceleration is faster than acceleration
-            if (o->oSeesawPlatformPitchVel * rotation < 0) {
-                rotation *= 0.04f;
-            } else {
-                rotation *= 0.02f;
-            }
-            */
-
-            o->oSeesawPlatformPitchVel += rotation;
-            marioct++;
+            f32 marioWeight = .15f;
+            f32 pressure = marioWeight * dist_between_objects(o,m->marioObj) * coss(obj_angle_to_object(o,m->marioObj) - o->oMoveAngleYaw);
+            o->oSeesawPlatformPitchVel += pressure;
         }
-
     }
-    if (marioct == 0) {
-        marioct = 1;
-    }
-    clamp_f32(&o->oSeesawPlatformPitchVel, -50.0f*marioct, 50.0f*marioct); //fun!
 
-    // Rotate back to 0
-    oscillate_toward(
-        /* value          */ &o->oFaceAnglePitch,
-        /* vel            */ &o->oSeesawPlatformPitchVel,
-        /* target         */ 0.0f,
-        /* velCloseToZero */ 6.0f,
-        /* accel          */ 3.0f,
-        /* slowdown       */ 3.0f);
+    // Simulate a torsion spring using real world spring equation
+    f32 offset = -o->oFaceAnglePitch;
 
+    // More bouncy, more fun
+    f32 strength = 0.05f;
+    f32 damping = 0.1f;
+
+    // Closely emulates the vanilla SM64 seesaw
+    //f32 strength = 0.005f;
+    //f32 damping = 0.5f;
+
+    f32 f = (offset * strength) - (o->oSeesawPlatformPitchVel * damping);
+
+    o->oSeesawPlatformPitchVel += f;
+
+    o->oFaceAnglePitch += o->oSeesawPlatformPitchVel;
 }

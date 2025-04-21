@@ -1514,7 +1514,7 @@ void bowser_free_update(void) {
 
     if (platform != NULL) {
         s16 tempYaw = (s16) o->oFaceAngleYaw;
-        apply_platform_displacement(&sBowserDisplacementInfo, &o->oPosVec, &tempYaw, platform);
+        apply_platform_displacement(&sBowserDisplacementInfo, &o->oPosVec, &tempYaw, platform, NULL);
         o->oFaceAngleYaw = tempYaw;
     }
 
