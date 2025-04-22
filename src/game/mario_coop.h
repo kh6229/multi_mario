@@ -27,6 +27,7 @@ If the game freezes with music still playing from spawning too many Marios, try 
 #define IS_CONTROLLABLE(controlMode) (controlMode == COOP_CM_TAKE_TURNS || controlMode == COOP_CM_ALL_ACTIVE)
 
 extern int gCoopActiveMarios;
+extern int gCoopActiveControllableMarios;
 extern int gCoopActiveMarioIndex;
 
 struct MarioState * coop_spawn_mario_with_id(Vec3f pos, int marioID, int control_mode);

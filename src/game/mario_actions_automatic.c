@@ -536,7 +536,7 @@ void climb_up_ledge(struct MarioState *m) {
 }
 
 void update_ledge_climb_camera(struct MarioState *m) {
-    return; // Ryan Hakuri: NO
+    return;
     f32 dist = MIN(m->actionTimer, 14.0f);
 
     m->statusForCamera->pos[0] = m->pos[0] + dist * sins(m->faceAngle[1]);
