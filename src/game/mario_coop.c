@@ -135,6 +135,7 @@ void coop_npc_behavior(struct MarioState * m) {
 // Don't call this function yourself, used for level transitions
 void coop_reset_state(void) {
     gCoopActiveMarios = 1;
+    gCoopActiveControllableMarios = 1;
     gCoopActiveMarioIndex = 0;
     gMarioState = &gMarioStates[0];
     for (int i = 0; i < COOP_MARIO_STATES_MAX; i ++) {

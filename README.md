@@ -1,3 +1,6 @@
+# ![](https://i.imgur.com/kQJ0Ln9.png) Decompetition 1 - Multiple Marios ![](https://i.imgur.com/kQJ0Ln9.png)
+The foundation for SM64 Decompetition entries to be built upon or used as a reference for proprietary engines. A HackerSM64 based repository that adds support for multiple active MarioStates at once. Check `src/game/mario_coop.c` for documentation, and `src/game/mario_coop.h` for configuration. A separate branch, `lite`, has only the bare minimum functionality without custom objects or the example level. If you're a beginner or inexperienced with code, you can check the .blend in the `example` folder and see how the custom objects are used in the example level.
+
 # ![](https://i.imgur.com/CeOukzk.gif) HackerSM64 ![](https://i.imgur.com/s0LUbTo.gif)
 
 **AFTER CLONING THE REPO, CHECK OUT THE `include/config` FOLDER BEFORE ANYTHING ELSE! THERE'S A LOT OF STUFF IN THIS REPO THAT CAN BE TOGGLED THERE.**

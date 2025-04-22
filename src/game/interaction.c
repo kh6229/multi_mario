@@ -25,6 +25,7 @@
 #include "rumble_init.h"
 #include "config.h"
 #include "object_list_processor.h"
+#include "mario_coop.h"
 
 u8  sDelayInvincTimer;
 s16 sInvulnerable;
