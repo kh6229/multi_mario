@@ -14,6 +14,8 @@ struct ObjectHitbox sDoubleCherryHitbox = {
     /* hurtboxHeight:     */ 0,
 };
 
+// Behavior: bhvDoubleCherry
+// Model ID: MODEL_DOUBLE_CHERRY
 void bhv_coop_double_cherry(void) {
     switch(o->oAction) {
         case 0:
@@ -36,7 +38,10 @@ void bhv_coop_double_cherry(void) {
     }
 }
 
+// Behavior: bhvWeightPlate
+// Model ID: MODEL_PURPLE_SWITCH
 void bhv_coop_weight_plate(void) {
+    s32 oldMarioCt = o->oPressurePlateStatus;
     switch(o->oAction) {
         case 0: // init
             o->prevObj = spawn_object(o,MODEL_NUMBER,bhvWeightPlateNumber);
@@ -62,11 +67,36 @@ void bhv_coop_weight_plate(void) {
             o->header.gfx.scale[1] = approach_f32_asymptotic(o->header.gfx.scale[1],yscale,.1f);
             break;
     }
+    if (oldMarioCt != o->oPressurePlateStatus) {
+        cur_obj_play_sound_2(SOUND_GENERAL2_PURPLE_SWITCH);
+    }
 }
 
+// Behavior: bhvWeightPlate
+// Model ID: MODEL_PURPLE_SWITCH
+void bhv_coop_count_plate(void) {
+    f32 targetYScale = 1.5f;
+    // Collisions are managed by the bhv_coop_raise_platform
+    if (o->oPressurePlateStatus == 1) {
+        targetYScale = 0.2f;
+    }
+
+    o->header.gfx.scale[1] = approach_f32(o->header.gfx.scale[1],targetYScale,.3f,.3f);
+}
+
+// Behavior: bhvRaisePlatform
+// Model ID: MODEL_RAISE_PLATFORM
+
+// This object's default model is a square platform, but it can work with any sort of vertical raising mechanism- like a gate, for example.
+
+// BEHAVIOR PARAMATER 1: Height * 10
+// BEHAVIOR PAREMETER 2: Condition
 void bhv_coop_raise_platform(void) {
     f32 height = GET_BPARAM1(o->oBehParams) * 10.0f;
     switch(o->oBehParams2ndByte) {
+        /*
+        Weight plate raise platform rises by height * amount of Marios on the nearest weight plate.
+        */
         case RAISE_PLATFORM_BP_WEIGHT_PLATE:;
             struct Object * nearest_weight_plate = cur_obj_nearest_object_with_behavior(bhvWeightPlate);
 
@@ -75,6 +105,8 @@ void bhv_coop_raise_platform(void) {
                 o->oPosY = approach_f32_asymptotic(o->oPosY,o->oHomeY+height,.1f);
             }
             break;
+        /*
+        */
         case RAISE_PLATFORM_BP_COUNT_PLATE:;
             uintptr_t *behaviorAddr = segmented_to_virtual(bhvCountPlate);
             struct ObjectNode *listHead = &gObjectLists[get_object_list_from_behavior(behaviorAddr)];
@@ -88,12 +120,20 @@ void bhv_coop_raise_platform(void) {
                     && obj != o
                 ) {
                     u8 someone_is_on_this_platform = FALSE;
+
+                    s32 oldPressurePlateStatus = obj->oPressurePlateStatus;
+                    obj->oPressurePlateStatus = 0;
                     for (int i = 0; i < COOP_MARIO_STATES_MAX; i++) {
                         struct MarioState * m = &gMarioStates[i];
                         if (m->marioObj != NULL && m->marioObj->platform == obj) {
                             someone_is_on_this_platform = TRUE;
+                            obj->oPressurePlateStatus = 1;
                         }
                     }
+                    if (oldPressurePlateStatus != obj->oPressurePlateStatus) {
+                        play_sound(SOUND_GENERAL2_PURPLE_SWITCH, gGlobalSoundSource);
+                    }
+
                     if (!someone_is_on_this_platform) {
                         close_gate = TRUE;
                     }

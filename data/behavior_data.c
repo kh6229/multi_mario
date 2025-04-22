@@ -6099,7 +6099,7 @@ const BehaviorScript bhvCountPlate[] = {
     OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
     LOAD_COLLISION_DATA(purple_switch_seg8_collision_0800C7A8),
     BEGIN_LOOP(),
-        //CALL_NATIVE(bhv_coop_weight_plate),
+        CALL_NATIVE(bhv_coop_count_plate),
         CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
 };

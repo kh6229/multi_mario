@@ -3,15 +3,20 @@
 #ifndef MARIO_COOP_H
 #define MARIO_COOP_H
 
+/*
+Check behaviors/coop_objects.inc.c for documentation on custom objects.
+You can also check behaviors/seesaw_platform.inc.c to play with new seesaw dynamics based on real world physics.
+*/
+
 enum {
     COOP_CM_TAKE_TURNS, // Controllable by player when set as main Mario
     COOP_CM_ALL_ACTIVE, // Controllable by player at all times
     COOP_CM_NPC, // Acts on its own, has a programmable brain
-    COOP_CM_CUSTOM // For custom programmed behavior
+    COOP_CM_CUSTOM // For custom programmed behavior, does nothing by default
 };
 
 #define COOP_DEBUG_MARIO_CONTROL_MODE COOP_CM_TAKE_TURNS // Default mode for debug Marios spawned with D-Down
-#define COOP_MARIO_HITBOX_SIZE 80.0f // For Mario vs. Mario collision
+#define COOP_MARIO_HITBOX_SIZE 80.0f // For Mario vs. Mario collision, is a sphere at the origin point
 
 #define COOP_MARIO_STATES_MAX 10 // Maximum amount of Marios allowed to be spawned at once
 /*
