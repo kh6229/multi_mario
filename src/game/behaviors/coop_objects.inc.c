@@ -1,3 +1,4 @@
+// Behavior: bhvSpawnCoopMario
 void bhv_coop_spawn_mario(void) {
     coop_spawn_mario(&o->oPosVec,o->oBehParams2ndByte);
 }
@@ -72,7 +73,7 @@ void bhv_coop_weight_plate(void) {
     }
 }
 
-// Behavior: bhvWeightPlate
+// Behavior: bhvCountPlate
 // Model ID: MODEL_PURPLE_SWITCH
 void bhv_coop_count_plate(void) {
     f32 targetYScale = 1.5f;
