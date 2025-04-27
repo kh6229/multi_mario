@@ -488,6 +488,7 @@ void spawn_objects_from_info(UNUSED s32 unused, struct SpawnInfo *spawnInfo) {
             // This change allows any object to use that param
             if (object->behavior == segmented_to_virtual(bhvMario)) {
                 gMarioObject = object;
+                gMarioObject->oFlags |= OBJ_FLAG_IS_A_MARIO;
                 gMarioState->marioObj = object;
                 geo_make_first_child(&object->header.gfx.node);
             }

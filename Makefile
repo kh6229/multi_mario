@@ -5,7 +5,7 @@ include util.mk
 # Default target
 default: all
 
-TARGET_STRING := hahayoucantgleantheprojectnamefrommyparallelstatus
+TARGET_STRING := sm64-decompetition-project
 
 # Preprocessor definitions
 DEFINES :=

@@ -1741,16 +1741,20 @@ void spawn_mist_particles_with_sound(u32 soundMagic) {
 }
 
 void cur_obj_push_mario_away(f32 radius) {
-    f32 marioRelX = gMarioObject->oPosX - o->oPosX;
-    f32 marioRelZ = gMarioObject->oPosZ - o->oPosZ;
-    f32 marioDist = sqr(marioRelX) + sqr(marioRelZ);
+    for (int i = 0; i < COOP_MARIO_STATES_MAX; i++) {
+        if (gMarioStates[i].marioObj != NULL) {
+            f32 marioRelX = gMarioStates[i].marioObj->oPosX - o->oPosX;
+            f32 marioRelZ = gMarioStates[i].marioObj->oPosZ - o->oPosZ;
+            f32 marioDist = sqr(marioRelX) + sqr(marioRelZ);
 
-    if (marioDist < sqr(radius)) {
-        marioDist = (radius - sqrtf(marioDist)) / radius;
-        //! If this function pushes Mario out of bounds, it will trigger Mario's
-        //  oob failsafe
-        gMarioStates[0].pos[0] += marioDist * marioRelX;
-        gMarioStates[0].pos[2] += marioDist * marioRelZ;
+            if (marioDist < sqr(radius)) {
+                marioDist = (radius - sqrtf(marioDist)) / radius;
+                //! If this function pushes Mario out of bounds, it will trigger Mario's
+                //  oob failsafe
+                gMarioStates[i].pos[0] += marioDist * marioRelX;
+                gMarioStates[i].pos[2] += marioDist * marioRelZ;
+            }
+        }
     }
 }
 
@@ -2218,7 +2222,7 @@ s32 obj_attack_collided_from_other_object(struct Object *obj) {
     if (obj->numCollidedObjs != 0) {
         struct Object *other = obj->collidedObjs[0];
 
-        if (other != gMarioObject) {
+        if (!(other->oFlags & OBJ_FLAG_IS_A_MARIO)) {
             other->oInteractStatus |= INT_STATUS_TOUCHED_MARIO | INT_STATUS_WAS_ATTACKED | INT_STATUS_INTERACTED
                                       | INT_STATUS_TOUCHED_BOB_OMB;
             return TRUE;
