@@ -37,6 +37,7 @@ struct MarioState * coop_spawn_mario_with_id(Vec3f pos, int marioID, int control
     init_mario_from_save_file(&gMarioStates[marioID],marioID);
     gMarioStates[marioID].marioObj = spawn_object(gMarioState->marioObj, MODEL_MARIO, bhvMario);
     gMarioStates[marioID].marioObj->oPlayerID = marioID;
+    gMarioStates[marioID].marioObj->oFlags |= OBJ_FLAG_IS_A_MARIO;
     init_mario(&gMarioStates[marioID]);
     gMarioStates[marioID].controlMode = control_mode;
     vec3f_copy(gMarioStates[marioID].pos, pos);
