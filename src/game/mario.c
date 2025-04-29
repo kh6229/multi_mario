@@ -1881,6 +1881,9 @@ void init_mario(struct MarioState *m) {
     }
 
     m->controlMode = COOP_CM_TAKE_TURNS;
+    
+    m->npcState = 0;
+    m->npcDirection = 0x0000;
 }
 
 void init_mario_from_save_file(struct MarioState *m, int playerId) {

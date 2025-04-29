@@ -18,6 +18,8 @@
 #include "puppycam2.h"
 #include "puppyprint.h"
 
+#include "mario_coop.h"
+
 #include "config.h"
 
 /* @file hud.c
@@ -533,6 +535,23 @@ void render_hud_camera_status(void) {
     gSPDisplayList(gDisplayListHead++, dl_hud_img_end);
 }
 
+void render_coop_debug(void) {
+    char textBytes[64];
+    print_set_envcolour(255, 255, 0, 255);
+    sprintf(textBytes, "Direction:");
+    print_small_text_light(10, 10, textBytes, PRINT_TEXT_ALIGN_LEFT, PRINT_ALL, FONT_OUTLINE);
+    print_set_envcolour(255, 255, 255, 255);
+    sprintf(textBytes, "%i", gMarioStates[1].npcDirection);
+    print_small_text_light(70, 10, textBytes, PRINT_TEXT_ALIGN_LEFT, PRINT_ALL, FONT_OUTLINE);
+
+    print_set_envcolour(255, 255, 0, 255);
+    sprintf(textBytes, "Magnitude:");
+    print_small_text_light(10, 20, textBytes, PRINT_TEXT_ALIGN_LEFT, PRINT_ALL, FONT_OUTLINE);
+    print_set_envcolour(255, 255, 255, 255);
+    sprintf(textBytes, "%2.2f", gMarioStates[1].intendedMag);
+    print_small_text_light(70, 20, textBytes, PRINT_TEXT_ALIGN_LEFT, PRINT_ALL, FONT_OUTLINE);
+}
+
 /**
  * Render HUD strings using hudDisplayFlags with it's render functions,
  * excluding the cannon reticle which detects a camera preset for it.
@@ -613,5 +632,7 @@ void render_hud(void) {
             render_debug_mode();
         }
 #endif
+
+        render_coop_debug();
     }
 }

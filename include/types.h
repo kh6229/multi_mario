@@ -461,6 +461,9 @@ struct MarioState {
              s16 wallYaw;
              u8 controlMode;
     // -- HackerSM64 MarioState fields end --
+
+    s16 npcDirection;
+    u8 npcState;
 };
 
 #endif // TYPES_H

@@ -113,9 +113,15 @@ int coop_delete_mario(struct MarioState * m) {
 }
 
 void coop_npc_behavior(struct MarioState * m) {
-    m->input |= INPUT_NONZERO_ANALOG; // Allows him to move
-    m->intendedMag = 8.0f; // Always holding
-    m->intendedYaw = 0x0000;
+    if (m->wall != NULL) {
+        m->input |= INPUT_NONZERO_ANALOG;
+        m->intendedMag = 2.0f;
+        m->npcDirection += 0x8000;
+    } else {
+        m->input |= INPUT_NONZERO_ANALOG; // Allows him to move
+        m->intendedMag = 10.0f;
+        m->intendedYaw = m->npcDirection;
+    }
 }
 
 // Don't call this function yourself, used for level transitions
