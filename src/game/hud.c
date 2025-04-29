@@ -542,14 +542,21 @@ void render_coop_debug(void) {
     print_small_text_light(10, 10, textBytes, PRINT_TEXT_ALIGN_LEFT, PRINT_ALL, FONT_OUTLINE);
     print_set_envcolour(255, 255, 255, 255);
     sprintf(textBytes, "%i", gMarioStates[1].npcDirection);
-    print_small_text_light(70, 10, textBytes, PRINT_TEXT_ALIGN_LEFT, PRINT_ALL, FONT_OUTLINE);
+    print_small_text_light(90, 10, textBytes, PRINT_TEXT_ALIGN_LEFT, PRINT_ALL, FONT_OUTLINE);
 
     print_set_envcolour(255, 255, 0, 255);
     sprintf(textBytes, "Magnitude:");
     print_small_text_light(10, 20, textBytes, PRINT_TEXT_ALIGN_LEFT, PRINT_ALL, FONT_OUTLINE);
     print_set_envcolour(255, 255, 255, 255);
     sprintf(textBytes, "%2.2f", gMarioStates[1].intendedMag);
-    print_small_text_light(70, 20, textBytes, PRINT_TEXT_ALIGN_LEFT, PRINT_ALL, FONT_OUTLINE);
+    print_small_text_light(90, 20, textBytes, PRINT_TEXT_ALIGN_LEFT, PRINT_ALL, FONT_OUTLINE);
+
+    print_set_envcolour(255, 255, 0, 255);
+    sprintf(textBytes, "NPC 1 State:");
+    print_small_text_light(10, 30, textBytes, PRINT_TEXT_ALIGN_LEFT, PRINT_ALL, FONT_OUTLINE);
+    print_set_envcolour(255, 255, 255, 255);
+    sprintf(textBytes, "%i", gMarioStates[1].npcState);
+    print_small_text_light(90, 30, textBytes, PRINT_TEXT_ALIGN_LEFT, PRINT_ALL, FONT_OUTLINE);
 }
 
 /**

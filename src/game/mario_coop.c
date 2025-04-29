@@ -112,15 +112,39 @@ int coop_delete_mario(struct MarioState * m) {
     return TRUE;
 }
 
-void coop_npc_behavior(struct MarioState * m) {
+void coop_npc_walking(struct MarioState * m) {
     if (m->wall != NULL) {
-        m->input |= INPUT_NONZERO_ANALOG;
-        m->intendedMag = 2.0f;
-        m->npcDirection += 0x8000;
+        m->npcState = NPC_STATE_TURNING;
     } else {
         m->input |= INPUT_NONZERO_ANALOG; // Allows him to move
-        m->intendedMag = 10.0f;
+        m->intendedMag = 8.0f;
         m->intendedYaw = m->npcDirection;
+    }
+}
+
+void coop_npc_turning(struct MarioState * m) {
+    m->input |= INPUT_NONZERO_ANALOG;
+    if (m->intendedMag > 0.0f) {
+        m->intendedMag -= 2.0f;
+    } else {
+        m->npcDirection += 0x8000;
+        m->npcState = NPC_STATE_WALKING;
+    }
+}
+
+void coop_npc_behavior(struct MarioState * m) {
+    switch (m->npcState) {
+        case NPC_STATE_STANDING:
+            m->npcState = NPC_STATE_WALKING;
+            break;
+        
+        case NPC_STATE_WALKING:
+            coop_npc_walking(m);
+            break;
+
+        case NPC_STATE_TURNING:
+            coop_npc_turning(m);
+            break;
     }
 }
 

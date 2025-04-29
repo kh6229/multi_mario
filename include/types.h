@@ -466,4 +466,10 @@ struct MarioState {
     u8 npcState;
 };
 
+enum NpcStates {
+    NPC_STATE_STANDING,
+    NPC_STATE_WALKING,
+    NPC_STATE_TURNING,
+};
+
 #endif // TYPES_H
