@@ -113,26 +113,56 @@ int coop_delete_mario(struct MarioState * m) {
 }
 
 void coop_npc_walking(struct MarioState * m) {
-    if (m->wall != NULL) {
-        m->npcState = NPC_STATE_TURNING;
-    } else {
-        m->input |= INPUT_NONZERO_ANALOG; // Allows him to move
-        m->intendedMag = 8.0f;
-        m->intendedYaw = m->npcDirection;
+    if (m->floor != SURFACE_DEFAULT) {
+        switch (m->floor->type) {
+            case SURFACE_NOISE_DEFAULT:
+                m->npcState = NPC_FLOOR_TURN_LEFT;
+                break;
+            
+            case SURFACE_HARD:
+                m->npcState = NPC_FLOOR_TURN_RIGHT;
+                break;
+
+            case SURFACE_HARD_SLIPPERY:
+                m->npcState = NPC_FLOOR_TURN_AROUND;
+                break;
+
+            default:
+                break;
+        }
     }
+    
+    if (m->wall != NULL) {
+        m->npcState = NPC_STATE_WALL_TURN;
+    }
+    
+    m->input |= INPUT_NONZERO_ANALOG; // Allows him to move
+    m->intendedMag = 8.0f;
 }
 
-void coop_npc_turning(struct MarioState * m) {
+void coop_npc_wall_turn(struct MarioState * m) {
     m->input |= INPUT_NONZERO_ANALOG;
-    if (m->intendedMag > 0.0f) {
-        m->intendedMag -= 2.0f;
-    } else {
-        m->npcDirection += 0x8000;
-        m->npcState = NPC_STATE_WALKING;
+    m->faceAngle[1] += 0x8000;
+    m->intendedYaw = m->faceAngle[1];
+    m->npcState = NPC_STATE_WALKING;
+}
+
+void coop_npc_floor_turn(struct MarioState * m, int ct) {
+    m->input |= INPUT_NONZERO_ANALOG;
+    if (m->turnCooldown == 0) {
+        for (int i = 0; i < ct; i++) {
+            m->faceAngle[1] += 0x2000;
+            m->intendedYaw = m->faceAngle[1];
+        }
+        m->turnCooldown = 30;
     }
+    m->npcState = NPC_STATE_WALKING;
 }
 
 void coop_npc_behavior(struct MarioState * m) {
+    if (m->turnCooldown > 0) {
+        m->turnCooldown--;
+    }
     switch (m->npcState) {
         case NPC_STATE_STANDING:
             m->npcState = NPC_STATE_WALKING;
@@ -142,9 +172,18 @@ void coop_npc_behavior(struct MarioState * m) {
             coop_npc_walking(m);
             break;
 
-        case NPC_STATE_TURNING:
-            coop_npc_turning(m);
+        case NPC_STATE_WALL_TURN:
+            coop_npc_wall_turn(m);
             break;
+
+        case NPC_FLOOR_TURN_LEFT:
+            coop_npc_floor_turn(m, 2);
+
+        case NPC_FLOOR_TURN_RIGHT:
+            coop_npc_floor_turn(m, 6);
+
+        case NPC_FLOOR_TURN_AROUND:
+            coop_npc_floor_turn(m, 4);
     }
 }
 

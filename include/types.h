@@ -462,14 +462,17 @@ struct MarioState {
              u8 controlMode;
     // -- HackerSM64 MarioState fields end --
 
-    s16 npcDirection;
     u8 npcState;
+    u8 turnCooldown;
 };
 
 enum NpcStates {
     NPC_STATE_STANDING,
     NPC_STATE_WALKING,
-    NPC_STATE_TURNING,
+    NPC_STATE_WALL_TURN,
+    NPC_FLOOR_TURN_LEFT,
+    NPC_FLOOR_TURN_RIGHT,
+    NPC_FLOOR_TURN_AROUND,
 };
 
 #endif // TYPES_H

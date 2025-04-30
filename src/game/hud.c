@@ -541,7 +541,7 @@ void render_coop_debug(void) {
     sprintf(textBytes, "Direction:");
     print_small_text_light(10, 10, textBytes, PRINT_TEXT_ALIGN_LEFT, PRINT_ALL, FONT_OUTLINE);
     print_set_envcolour(255, 255, 255, 255);
-    sprintf(textBytes, "%i", gMarioStates[1].npcDirection);
+    sprintf(textBytes, "%i", gMarioStates[1].faceAngle[1]);
     print_small_text_light(90, 10, textBytes, PRINT_TEXT_ALIGN_LEFT, PRINT_ALL, FONT_OUTLINE);
 
     print_set_envcolour(255, 255, 0, 255);
@@ -557,6 +557,13 @@ void render_coop_debug(void) {
     print_set_envcolour(255, 255, 255, 255);
     sprintf(textBytes, "%i", gMarioStates[1].npcState);
     print_small_text_light(90, 30, textBytes, PRINT_TEXT_ALIGN_LEFT, PRINT_ALL, FONT_OUTLINE);
+
+    print_set_envcolour(255, 255, 0, 255);
+    sprintf(textBytes, "Cooldown:");
+    print_small_text_light(10, 40, textBytes, PRINT_TEXT_ALIGN_LEFT, PRINT_ALL, FONT_OUTLINE);
+    print_set_envcolour(255, 255, 255, 255);
+    sprintf(textBytes, "%i", gMarioStates[1].turnCooldown);
+    print_small_text_light(90, 40, textBytes, PRINT_TEXT_ALIGN_LEFT, PRINT_ALL, FONT_OUTLINE);
 }
 
 /**

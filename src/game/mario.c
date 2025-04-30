@@ -1883,7 +1883,7 @@ void init_mario(struct MarioState *m) {
     m->controlMode = COOP_CM_TAKE_TURNS;
     
     m->npcState = NPC_STATE_STANDING;
-    m->npcDirection = 0x0000;
+    m->turnCooldown = 0;
 }
 
 void init_mario_from_save_file(struct MarioState *m, int playerId) {
