@@ -1344,11 +1344,13 @@ void update_mario_inputs(struct MarioState *m) {
 #endif
 
     if (m == gMarioState || m->controlMode == COOP_CM_ALL_ACTIVE) {
-        update_mario_button_inputs(m);
-        update_mario_joystick_inputs(m);
+        if (m->controlMode != COOP_CM_NPC) {
+            update_mario_button_inputs(m);
+            update_mario_joystick_inputs(m);
+        }
     }
 
-    if ((m->controlMode == COOP_CM_NPC) && gMarioState != m) {
+    if ((m->controlMode == COOP_CM_NPC)) {
         coop_npc_behavior(m);
     }
 

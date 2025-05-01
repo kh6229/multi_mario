@@ -41,6 +41,11 @@ struct MarioState * coop_spawn_mario_with_id(Vec3f pos, int marioID, int control
     init_mario(&gMarioStates[marioID]);
     gMarioStates[marioID].controlMode = control_mode;
     vec3f_copy(gMarioStates[marioID].pos, pos);
+
+    if (gMarioStates[marioID].controlMode == COOP_CM_NPC) {
+        gMarioStates[marioID].health = 0x110;
+    }
+
     return &gMarioStates[marioID];
 }
 
@@ -68,7 +73,7 @@ void coop_give_control_to_next(void) {
         if (gCoopActiveMarioIndex >= COOP_MARIO_STATES_MAX) {
             gCoopActiveMarioIndex = 0;
         }
-    } while(gMarioStates[gCoopActiveMarioIndex].marioObj == NULL || !IS_CONTROLLABLE(gMarioStates[gCoopActiveMarioIndex].controlMode));
+    } while(gMarioStates[gCoopActiveMarioIndex].marioObj == NULL || gCoopActiveMarioIndex > 1);
 
     gMarioState=&gMarioStates[gCoopActiveMarioIndex];
     gMarioObject=gMarioStates[gCoopActiveMarioIndex].marioObj;

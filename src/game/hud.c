@@ -564,6 +564,13 @@ void render_coop_debug(void) {
     print_set_envcolour(255, 255, 255, 255);
     sprintf(textBytes, "%i", gMarioStates[1].turnCooldown);
     print_small_text_light(90, 40, textBytes, PRINT_TEXT_ALIGN_LEFT, PRINT_ALL, FONT_OUTLINE);
+
+    print_set_envcolour(255, 255, 0, 255);
+    sprintf(textBytes, "NPC 1 HP:");
+    print_small_text_light(10, 50, textBytes, PRINT_TEXT_ALIGN_LEFT, PRINT_ALL, FONT_OUTLINE);
+    print_set_envcolour(255, 255, 255, 255);
+    sprintf(textBytes, "%i", gMarioStates[1].turnCooldown);
+    print_small_text_light(90, 50, textBytes, PRINT_TEXT_ALIGN_LEFT, PRINT_ALL, FONT_OUTLINE);
 }
 
 /**
