@@ -137,7 +137,7 @@ void coop_npc_walking(struct MarioState * m) {
     }
     
     m->input |= INPUT_NONZERO_ANALOG; // Allows him to move
-    m->intendedMag = 8.0f;
+    m->intendedMag = 6.0f;
 }
 
 void coop_npc_wall_turn(struct MarioState * m) {
@@ -160,9 +160,12 @@ void coop_npc_floor_turn(struct MarioState * m, int ct) {
 }
 
 void coop_npc_behavior(struct MarioState * m) {
+    
+
     if (m->turnCooldown > 0) {
         m->turnCooldown--;
     }
+
     switch (m->npcState) {
         case NPC_STATE_STANDING:
             m->npcState = NPC_STATE_WALKING;
@@ -209,14 +212,19 @@ void coop_mario_collision(struct MarioState * m) {
         f32 distSquared = sqr(diff[0]) + sqr(diff[1]) + sqr(diff[2]);
 
         if (distSquared < sqr(COOP_MARIO_HITBOX_SIZE)) {
-            f32 pressure = sqrtf(sqr(COOP_MARIO_HITBOX_SIZE)-distSquared)/4.f;
+            
+            if (m->controlMode == COOP_CM_NPC) {
+                m->npcState = NPC_STATE_WALL_TURN;
+            } else {
+                f32 pressure = sqrtf(sqr(COOP_MARIO_HITBOX_SIZE)-distSquared)/4.f;
 
-            vec3f_normalize(diff);
-            vec3_scale_dest(diff,diff,-pressure);
+                vec3f_normalize(diff);
+                vec3_scale_dest(diff,diff,-pressure);
 
-            vec3f_sum(m->pos,m->pos,diff);
-            vec3_scale_dest(diff,diff,-1.0f);
-            vec3f_sum(gMarioStates[i].pos,gMarioStates[i].pos,diff);
+                vec3f_sum(m->pos,m->pos,diff);
+                vec3_scale_dest(diff,diff,-1.0f);
+                vec3f_sum(gMarioStates[i].pos,gMarioStates[i].pos,diff);
+            }
         }
     }
 }
