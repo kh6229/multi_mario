@@ -341,4 +341,6 @@ extern const Gfx white_particle_small_unused_dl[];
 
 #include "doubleCherry/geo_header.h"
 
+#include "mini_mario/geo_header.h"
+
 #endif

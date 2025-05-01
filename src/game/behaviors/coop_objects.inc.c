@@ -1,6 +1,6 @@
 // Behavior: bhvSpawnCoopMario
 void bhv_coop_spawn_mario(void) {
-    coop_spawn_mario(&o->oPosVec,o->oBehParams2ndByte);
+    coop_spawn_mario(&o->oPosVec,o->oBehParams2ndByte, MODEL_MARIO);
 }
 
 struct ObjectHitbox sDoubleCherryHitbox = {
@@ -31,7 +31,7 @@ void bhv_coop_double_cherry(void) {
 
                 create_sound_spawner(SOUND_MENU_EXIT_PIPE);
                 spawn_mist_particles_variable(0, 0, 50.0f);
-                coop_spawn_mario(&o->oPosVec,COOP_CM_ALL_ACTIVE);
+                coop_spawn_mario(&o->oPosVec,COOP_CM_ALL_ACTIVE, MODEL_MARIO);
                 obj_mark_for_deletion(o);
             }
             o->oInteractStatus = 0;

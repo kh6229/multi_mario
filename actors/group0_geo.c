@@ -20,3 +20,4 @@
 #include "exampleSeesaw/geo.inc.c"
 #include "raisePlatform/geo.inc.c"
 #include "doubleCherry/geo.inc.c"
+#include "mini_mario/geo.inc.c"

@@ -36,3 +36,4 @@
 #include "raisePlatform/collision.inc.c"
 #include "raisePlatform/model.inc.c"
 #include "doubleCherry/model.inc.c"
+#include "mini_mario/model.inc.c"

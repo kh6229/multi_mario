@@ -35,8 +35,8 @@ extern int gCoopActiveMarios;
 extern int gCoopActiveControllableMarios;
 extern int gCoopActiveMarioIndex;
 
-struct MarioState * coop_spawn_mario_with_id(Vec3f pos, int marioID, int control_mode);
-struct MarioState * coop_spawn_mario(Vec3f pos, int control_mode);
+struct MarioState * coop_spawn_mario_with_id(Vec3f pos, int marioID, int control_mode, ModelID32 model);
+struct MarioState * coop_spawn_mario(Vec3f pos, int control_mode, ModelID32 model);
 void coop_give_control_to_next(void);
 int coop_delete_mario(struct MarioState * m);
 

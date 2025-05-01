@@ -26,7 +26,7 @@ int gCoopActiveMarioIndex = 0;
 Spawns a Mario at the specified position with a specific player ID.
 Returns the MarioState of the spawned Mario, NULL if the ID is already used.
 */
-struct MarioState * coop_spawn_mario_with_id(Vec3f pos, int marioID, int control_mode) {
+struct MarioState * coop_spawn_mario_with_id(Vec3f pos, int marioID, int control_mode, ModelID32 model) {
     if (gMarioStates[marioID].marioObj != NULL) {return NULL;} // Slot already used
 
     gCoopActiveMarios++;
@@ -35,7 +35,7 @@ struct MarioState * coop_spawn_mario_with_id(Vec3f pos, int marioID, int control
     }
 
     init_mario_from_save_file(&gMarioStates[marioID],marioID);
-    gMarioStates[marioID].marioObj = spawn_object(gMarioState->marioObj, MODEL_MARIO, bhvMario);
+    gMarioStates[marioID].marioObj = spawn_object(gMarioState->marioObj, model, bhvMario);
     gMarioStates[marioID].marioObj->oPlayerID = marioID;
     gMarioStates[marioID].marioObj->oFlags |= OBJ_FLAG_IS_A_MARIO;
     init_mario(&gMarioStates[marioID]);
@@ -48,11 +48,11 @@ struct MarioState * coop_spawn_mario_with_id(Vec3f pos, int marioID, int control
 Spawns a Mario at the specified position using any empty ID.
 Returns the MarioState of the spawned Mario, NULL if Mario count is maxed out.
 */
-struct MarioState * coop_spawn_mario(Vec3f pos, int control_mode) {
+struct MarioState * coop_spawn_mario(Vec3f pos, int control_mode, ModelID32 model) {
     for (int i = 0; i < COOP_MARIO_STATES_MAX; i ++) {
         // Search for a uninitialized mario
         if (gMarioStates[i].marioObj == NULL) {
-            return coop_spawn_mario_with_id(pos,i,control_mode);
+            return coop_spawn_mario_with_id(pos,i,control_mode, model);
         }
     }
 

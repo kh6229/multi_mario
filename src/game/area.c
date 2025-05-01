@@ -398,7 +398,7 @@ void render_game(void) {
 
     #ifdef COOP_DEBUG_SPAWN_MARIO_WITH_DDOWN
     if (gPlayer1Controller->buttonPressed & D_JPAD) {
-        coop_spawn_mario(gMarioState->pos, COOP_DEBUG_MARIO_CONTROL_MODE);
+        coop_spawn_mario(gMarioState->pos, COOP_DEBUG_MARIO_CONTROL_MODE, MODEL_MINI_MARIO);
     }
     #endif
 
