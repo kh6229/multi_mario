@@ -1888,6 +1888,7 @@ void init_mario(struct MarioState *m) {
     
     m->npcState = NPC_STATE_STANDING;
     m->turnCooldown = 0;
+    m->jumpTimer = 0;
 }
 
 void init_mario_from_save_file(struct MarioState *m, int playerId) {

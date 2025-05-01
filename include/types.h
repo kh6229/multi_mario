@@ -464,6 +464,7 @@ struct MarioState {
 
     u8 npcState;
     u8 turnCooldown;
+    u8 jumpTimer;
 };
 
 enum NpcStates {
@@ -473,6 +474,7 @@ enum NpcStates {
     NPC_FLOOR_TURN_LEFT,
     NPC_FLOOR_TURN_RIGHT,
     NPC_FLOOR_TURN_AROUND,
+    NPC_STATE_JUMP,
 };
 
 #endif // TYPES_H

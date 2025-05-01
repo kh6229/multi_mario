@@ -113,8 +113,8 @@ int coop_delete_mario(struct MarioState * m) {
 }
 
 void coop_npc_walking(struct MarioState * m) {
-    if (m->floor != SURFACE_DEFAULT) {
-        switch (m->floor->type) {
+    if (m->floor != SURFACE_DEFAULT) { // If floor isn't default...
+        switch (m->floor->type) {      // Decide which way to turn based on floor type
             case SURFACE_NOISE_DEFAULT:
                 m->npcState = NPC_FLOOR_TURN_LEFT;
                 break;
@@ -133,11 +133,11 @@ void coop_npc_walking(struct MarioState * m) {
     }
     
     if (m->wall != NULL) {
-        m->npcState = NPC_STATE_WALL_TURN;
+        m->npcState = NPC_STATE_JUMP;
     }
     
     m->input |= INPUT_NONZERO_ANALOG; // Allows him to move
-    m->intendedMag = 6.0f;
+    m->intendedMag = 6.0f; // Always going slow
 }
 
 void coop_npc_wall_turn(struct MarioState * m) {
@@ -159,10 +159,28 @@ void coop_npc_floor_turn(struct MarioState * m, int ct) {
     m->npcState = NPC_STATE_WALKING;
 }
 
-void coop_npc_behavior(struct MarioState * m) {
-    
+void coop_npc_jump(struct MarioState * m) {
+    m->input |= INPUT_NONZERO_ANALOG;
+    m->input |= INPUT_A_PRESSED;
+    m->intendedMag = 6.0f;
 
-    if (m->turnCooldown > 0) {
+    if (m->jumpTimer < 7) {
+        m->input |= INPUT_A_DOWN;
+        m->jumpTimer++;
+    } else {
+        m->input ^= INPUT_A_DOWN;
+        m->jumpTimer = 0;
+
+        if (m->wall != NULL) {
+            m->npcState = NPC_STATE_WALL_TURN;
+        } else {
+            m->npcState = NPC_STATE_WALKING;
+        }
+    }
+}
+
+void coop_npc_behavior(struct MarioState * m) {
+    if (m->turnCooldown > 0) { // Subtract the turn cooldown
         m->turnCooldown--;
     }
 
@@ -181,12 +199,19 @@ void coop_npc_behavior(struct MarioState * m) {
 
         case NPC_FLOOR_TURN_LEFT:
             coop_npc_floor_turn(m, 2);
+            break;
 
         case NPC_FLOOR_TURN_RIGHT:
             coop_npc_floor_turn(m, 6);
+            break;
 
         case NPC_FLOOR_TURN_AROUND:
             coop_npc_floor_turn(m, 4);
+            break;
+
+        case NPC_STATE_JUMP:
+            coop_npc_jump(m);
+            break;
     }
 }
 
