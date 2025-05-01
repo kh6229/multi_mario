@@ -1783,6 +1783,7 @@ s32 execute_mario_action(struct MarioState *m) {
 #ifdef BREATH_METER
         update_mario_breath(m);
 #endif
+        m->marioBodyState->action = m->action;
         if (m == gMarioState) {
             update_mario_info_for_cam(m);
         }

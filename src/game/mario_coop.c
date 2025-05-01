@@ -230,7 +230,7 @@ void coop_reset_state(void) {
 // Don't call this function yourself, used for Mario touching other Marios O////O 
 void coop_mario_collision(struct MarioState * m) {
     for (int i = 0; i < COOP_MARIO_STATES_MAX; i ++) {
-        if (&gMarioStates[i] == m) {continue;}
+        if (&gMarioStates[i] == m || &gMarioStates[i].marioObj == NULL) {continue;}
 
         Vec3f diff;
         vec3_diff(diff, gMarioStates[i].pos, m->pos);
