@@ -133,7 +133,12 @@ void coop_npc_walking(struct MarioState * m) {
     }
     
     if (m->wall != NULL) {
-        m->npcState = NPC_STATE_JUMP;
+        s16 jump_height = 100;
+        if (m->wall->upperY <= (m->floor->upperY + jump_height)) {
+            m->npcState = NPC_STATE_JUMP;
+        } else {
+            m->npcState = NPC_STATE_WALL_TURN;
+        }
     }
     
     m->input |= INPUT_NONZERO_ANALOG; // Allows him to move
@@ -162,7 +167,7 @@ void coop_npc_floor_turn(struct MarioState * m, int ct) {
 void coop_npc_jump(struct MarioState * m) {
     m->input |= INPUT_NONZERO_ANALOG;
     m->input |= INPUT_A_PRESSED;
-    m->intendedMag = 6.0f;
+    m->intendedMag = 8.0f;
 
     if (m->jumpTimer < 7) {
         m->input |= INPUT_A_DOWN;
