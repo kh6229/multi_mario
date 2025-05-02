@@ -4,6 +4,7 @@
 #define MODEL_NONE                             0x00
 
 /* fast64 object exports get inserted here */
+#define MODEL_END_GATE                    228
 #define MODEL_MINI_MARIO                  226
 
 /* Global models that are loaded for every level */

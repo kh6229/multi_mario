@@ -21,3 +21,4 @@
 #include "raisePlatform/geo.inc.c"
 #include "doubleCherry/geo.inc.c"
 #include "mini_mario/geo.inc.c"
+#include "end_gate/geo.inc.c"

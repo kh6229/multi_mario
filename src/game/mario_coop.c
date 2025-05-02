@@ -138,16 +138,16 @@ void coop_npc_walking(struct MarioState * m) {
     }
     
     if (m->wall != NULL) {
-        s16 jump_height = 100;
-        if (m->wall->upperY <= (m->floor->upperY + jump_height)) {
-            m->npcState = NPC_STATE_JUMP;
+        s16 jump_height = 150;
+        if (m->wall->upperY <= (m->floor->upperY + jump_height)) { // If the height of the wall is shorter than
+            m->npcState = NPC_STATE_JUMP;                          // the jump height, then jump. Else start turning
         } else {
             m->npcState = NPC_STATE_WALL_TURN;
         }
     }
     
     m->input |= INPUT_NONZERO_ANALOG; // Allows him to move
-    m->intendedMag = 6.0f; // Always going slow
+    m->intendedMag = 8.0f; // Always going slow
 }
 
 void coop_npc_wall_turn(struct MarioState * m) {
@@ -158,7 +158,7 @@ void coop_npc_wall_turn(struct MarioState * m) {
 }
 
 void coop_npc_floor_turn(struct MarioState * m, int ct) {
-    m->input |= INPUT_NONZERO_ANALOG;
+    m->input |= INPUT_NONZERO_ANALOG; // Allows him to move
     if (m->turnCooldown == 0) {
         for (int i = 0; i < ct; i++) {
             m->faceAngle[1] += 0x2000;
@@ -170,18 +170,18 @@ void coop_npc_floor_turn(struct MarioState * m, int ct) {
 }
 
 void coop_npc_jump(struct MarioState * m) {
-    m->input |= INPUT_NONZERO_ANALOG;
-    m->input |= INPUT_A_PRESSED;
-    m->intendedMag = 8.0f;
+    m->input |= INPUT_NONZERO_ANALOG; // Allows him to move
+    m->input |= INPUT_A_PRESSED; // Allows him to jump
+    m->intendedMag = 15.0f; // Go faster when jumping to avoid ledge grabs
 
-    if (m->jumpTimer < 7) {
+    if (m->jumpTimer < 7) { // Hold A for 7 frames
         m->input |= INPUT_A_DOWN;
         m->jumpTimer++;
     } else {
-        m->input ^= INPUT_A_DOWN;
+        m->input ^= INPUT_A_DOWN; // Let go of A after 7 frames
         m->jumpTimer = 0;
 
-        if (m->wall != NULL) {
+        if (m->wall != NULL) { // If we still hit a wall, turn around. Else continue walking
             m->npcState = NPC_STATE_WALL_TURN;
         } else {
             m->npcState = NPC_STATE_WALKING;
@@ -194,9 +194,13 @@ void coop_npc_behavior(struct MarioState * m) {
         m->turnCooldown--;
     }
 
+    if (m->wallCooldown > 0) { // Subtract the wall turn cooldown
+        m->wallCooldown--;
+    }
+
     switch (m->npcState) {
         case NPC_STATE_STANDING:
-            m->npcState = NPC_STATE_WALKING;
+            m->npcState = NPC_STATE_WALKING; // Placeholder, makes sure NPC starts walking when spawned
             break;
         
         case NPC_STATE_WALKING:

@@ -1,0 +1,13 @@
+extern const GeoLayout end_gate_geo[];
+extern u8 end_gate_star_surface_rgba16_ci8[];
+extern u8 end_gate_star_surface_rgba16_pal_rgba16[];
+extern Vtx end_gate_End_Gate_Visual_mesh_layer_1_vtx_cull[8];
+extern Vtx end_gate_End_Gate_Visual_mesh_layer_1_vtx_0[61];
+extern Gfx end_gate_End_Gate_Visual_mesh_layer_1_tri_0[];
+extern Vtx end_gate_End_Gate_Visual_mesh_layer_1_vtx_1[24];
+extern Gfx end_gate_End_Gate_Visual_mesh_layer_1_tri_1[];
+extern Gfx mat_end_gate_f3dlite_material_001[];
+extern Gfx mat_revert_end_gate_f3dlite_material_001[];
+extern Gfx mat_end_gate_f3dlite_material[];
+extern Gfx mat_revert_end_gate_f3dlite_material[];
+extern Gfx end_gate_End_Gate_Visual_mesh_layer_1[];

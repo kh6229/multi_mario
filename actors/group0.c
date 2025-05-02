@@ -37,3 +37,5 @@
 #include "raisePlatform/model.inc.c"
 #include "doubleCherry/model.inc.c"
 #include "mini_mario/model.inc.c"
+#include "end_gate/collision.inc.c"
+#include "end_gate/model.inc.c"

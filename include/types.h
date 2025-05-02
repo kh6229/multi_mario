@@ -465,6 +465,7 @@ struct MarioState {
     u8 npcState;
     u8 turnCooldown;
     u8 jumpTimer;
+    u8 wallCooldown;
 };
 
 enum NpcStates {

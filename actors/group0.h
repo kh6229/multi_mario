@@ -343,4 +343,8 @@ extern const Gfx white_particle_small_unused_dl[];
 
 #include "mini_mario/geo_header.h"
 
+#include "end_gate/collision_header.h"
+
+#include "end_gate/geo_header.h"
+
 #endif
