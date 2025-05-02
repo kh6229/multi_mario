@@ -16,9 +16,9 @@ enum {
 };
 
 #define COOP_DEBUG_MARIO_CONTROL_MODE COOP_CM_NPC // Default mode for debug Marios spawned with D-Down
-#define COOP_MARIO_HITBOX_SIZE 80.0f // For Mario vs. Mario collision, is a sphere at the origin point
+#define COOP_MARIO_HITBOX_SIZE 0.0f // For Mario vs. Mario collision, is a sphere at the origin point
 
-#define COOP_MARIO_STATES_MAX 10 // Maximum amount of Marios allowed to be spawned at once
+#define COOP_MARIO_STATES_MAX 6 // Maximum amount of Marios allowed to be spawned at once
 /*
 If the emulator crashes from spawning too many Marios, try increasing GFX_POOL_SIZE in config_graphics.h
 If the game freezes with music still playing from spawning too many Marios, try increasing OBJECT_POOL_CAPACITY in object_list_processor.h

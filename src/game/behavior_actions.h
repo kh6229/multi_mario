@@ -555,6 +555,8 @@ void bhv_coop_weight_plate(void);
 void bhv_coop_raise_platform(void);
 void bhv_coop_double_cherry(void);
 void bhv_coop_count_plate(void);
+void bhv_end_gate_init(void);
+void bhv_end_gate_loop(void);
 
 Gfx *geo_move_mario_part_from_parent(s32 callContext, UNUSED struct GraphNode *node, Mat4 mtx);
 

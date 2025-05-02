@@ -32,6 +32,7 @@
 #include "spawn_object.h"
 #include "spawn_sound.h"
 #include "rumble_init.h"
+#include "mario_coop.h"
 
 /**
  * @file obj_behaviors.c
@@ -774,3 +775,4 @@ UNUSED s32 debug_sequence_tracker(s16 debugInputSequence[]) {
 #include "behaviors/treasure_chest.inc.c"
 #include "behaviors/mips.inc.c"
 #include "behaviors/yoshi.inc.c"
+#include "behaviors/end_gate.inc.c"

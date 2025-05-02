@@ -6135,7 +6135,9 @@ const BehaviorScript bhvEndGate[] = {
     BEGIN(OBJ_LIST_SURFACE),
     OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_COMPUTE_DIST_TO_MARIO),
     LOAD_COLLISION_DATA(end_gate_collision),
+    CALL_NATIVE(bhv_end_gate_init),
     BEGIN_LOOP(),
+        CALL_NATIVE(bhv_end_gate_loop),
         CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
 };

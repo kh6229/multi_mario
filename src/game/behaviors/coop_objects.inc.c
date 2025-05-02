@@ -1,6 +1,6 @@
 // Behavior: bhvSpawnCoopMario
 void bhv_coop_spawn_mario(void) {
-    coop_spawn_mario(&o->oPosVec,o->oBehParams2ndByte, MODEL_MARIO);
+    coop_spawn_mario(&o->oPosVec,o->oBehParams2ndByte, MODEL_MINI_MARIO);
 }
 
 struct ObjectHitbox sDoubleCherryHitbox = {
