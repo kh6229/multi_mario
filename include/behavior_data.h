@@ -546,5 +546,6 @@ extern const BehaviorScript bhvCountPlate[];
 extern const BehaviorScript bhvWeightPlateNumber[];
 extern const BehaviorScript bhvRaisePlatform[];
 extern const BehaviorScript bhvDoubleCherry[];
+extern const BehaviorScript bhvEndGate[];
 
 #endif // BEHAVIOR_DATA_H
