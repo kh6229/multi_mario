@@ -5,6 +5,7 @@ const GeoLayout bob_area_1_geo[] = {
 	GEO_OPEN_NODE(),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, bob_dl_Level_Mesh_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_TRANSPARENT, bob_dl_Level_Mesh_mesh_layer_5),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, bob_dl_Level_Mesh_001_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };

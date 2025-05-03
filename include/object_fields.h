@@ -1270,6 +1270,7 @@
 #define           oTurnPlaneYaw            OBJECT_FIELD_S16(0x1D, 0)
 #define           oTurnPlaneMariosTurned   OBJECT_FIELD_S32(0x1F)
 #define           oTurnPlaneMiniMarioCount OBJECT_FIELD_S32(0x21)
+#define           oTurnPlaneCooldown       OBJECT_FIELD_S32(0x23)
 
 /*Custom general defines:
 
