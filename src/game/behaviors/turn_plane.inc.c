@@ -14,6 +14,18 @@ void bhv_turn_plane_loop(void) {
 
         case 1:
             if (o->oTurnPlaneType != TURN_PLANE_TYPE_STAY) {
+                if (o->oTurnPlaneMariosTurned >= o->oTurnPlaneMiniMarioCount) {
+                    switch (o->oTurnPlaneType) {
+                        case TURN_PLANE_TYPE_180:
+                            o->oTurnPlaneYaw += 0x8000;
+                            break;
+
+                        case TURN_PLANE_TYPE_DELETE:
+                            obj_mark_for_deletion(o);
+                            break;
+                    }
+                }
+                
                 for (u8 i = 0; i < COOP_MARIO_STATES_MAX; i++) {
                     struct MarioState * m = &gMarioStates[i];
                     if (m->marioObj != NULL && m->controlMode == COOP_CM_NPC && m->marioObj->platform == o && o->oTurnPlaneCooldown == 0) {
@@ -25,6 +37,7 @@ void bhv_turn_plane_loop(void) {
                 if (o->oTurnPlaneCooldown > 0) {
                     o->oTurnPlaneCooldown--;
                 }
+
             }
             break;
     }

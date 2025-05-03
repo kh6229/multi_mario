@@ -9,6 +9,8 @@
 #include "engine/math_util.h"
 #include "game_init.h"
 #include "camera.h"
+
+#include "obj_behaviors.h"
 /*
 
 mario_coop.c
@@ -129,7 +131,7 @@ void coop_npc_walking(struct MarioState * m) {
     }
     
     if (m->wall != NULL) {
-        s16 jump_height = 150;
+        s16 jump_height = 200;
         if (m->wall->upperY <= (m->floor->upperY + jump_height)) { // If the height of the wall is shorter than
             m->npcState = NPC_STATE_JUMP;                          // the jump height, then jump. Else start turning
         } else {

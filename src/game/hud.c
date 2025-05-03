@@ -539,8 +539,9 @@ void render_hud_camera_status(void) {
 
 const char *dialogIDs[] = {
     "NULL",
-    "Wow! You're smack in the middle of the battlefield.\nYou can find where the minis are by pressing L.\nTry it now!",
-    "This switch activates the minis.\nThis makes them start walking on their own.\nThere's no turning them off once you activate them.",
+    "Wow! You're smack in the middle of the battlefield.\nYou can find where the Mini Marios are by pressing L.\nTry it now!",
+    "This switch activates the Mini Marios.\nThis makes them start walking on their own.\nThere's no turning them off once you activate them.",
+    "Watch out! Mini Marios only have one health.\nMake sure you get enemies out of the way of them.\nIf one dies, it's game over.",
 };
 
 void render_dialog_box(u8 id) {
