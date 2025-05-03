@@ -1,6 +1,6 @@
 // Behavior: bhvSpawnCoopMario
 void bhv_coop_spawn_mario(void) {
-    coop_spawn_mario(&o->oPosVec,o->oBehParams2ndByte, MODEL_MINI_MARIO);
+    coop_spawn_mario(&o->oPosVec,o->oBehParams2ndByte, MODEL_MINI_MARIO, o->oFaceAngleYaw);
 }
 
 struct ObjectHitbox sDoubleCherryHitbox = {
@@ -31,7 +31,7 @@ void bhv_coop_double_cherry(void) {
 
                 create_sound_spawner(SOUND_MENU_EXIT_PIPE);
                 spawn_mist_particles_variable(0, 0, 50.0f);
-                coop_spawn_mario(&o->oPosVec,COOP_CM_ALL_ACTIVE, MODEL_MARIO);
+                coop_spawn_mario(&o->oPosVec,COOP_CM_ALL_ACTIVE, MODEL_MARIO, 0);
                 obj_mark_for_deletion(o);
             }
             o->oInteractStatus = 0;
@@ -149,5 +149,21 @@ void bhv_coop_raise_platform(void) {
             o->oPosY = approach_f32(o->oPosY,o->oHomeY+height,10.f,10.f);
 
             break;
+    }
+}
+
+void bhv_mini_mario_button_loop(void) {
+    struct MarioState * mainMario = &gMarioStates[0];
+    if (mainMario->marioObj->platform == o && o->oButtonPressed == 0) {
+        o->oButtonPressed++;
+    }
+
+    if (o->oButtonPressed == 1) {
+        cur_obj_play_sound_2(SOUND_MENU_CLICK_FILE_SELECT);
+        o->oButtonPressed++;
+    }
+
+    if (o->oButtonPressed > 0 && o->header.gfx.scale[1] > 0.4f) {
+        o->header.gfx.scale[1] -= 0.1f;
     }
 }

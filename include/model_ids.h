@@ -4,7 +4,9 @@
 #define MODEL_NONE                             0x00
 
 /* fast64 object exports get inserted here */
-#define MODEL_END_GATE                    228
+#define MODEL_MINI_MARIO_BUTTON           229
+#define MODEL_EXCLAMATION_POINT_2         228
+#define MODEL_END_GATE                    227
 #define MODEL_MINI_MARIO                  226
 
 /* Global models that are loaded for every level */
@@ -453,7 +455,7 @@
 #define MODEL_BREAKABLE_BOX_NO_SHADOW     0x82        // breakable_box_no_shadow_geo
 #define MODEL_BREAKABLE_BOX_SMALL MODEL_BREAKABLE_BOX_NO_SHADOW // backwards compatibility
 #define MODEL_EXCLAMATION_BOX_OUTLINE     0x83        // exclamation_box_outline_geo
-#define MODEL_EXCLAMATION_POINT           0x84        // exclamation_point_seg8_dl_08025F08
+#define MODEL_EXCLAMATION_POINT           0x84
 #define MODEL_MARIOS_WINGED_METAL_CAP     0x85        // marios_winged_metal_cap_geo
 #define MODEL_MARIOS_METAL_CAP            0x86        // marios_metal_cap_geo
 #define MODEL_MARIOS_WING_CAP             0x87        // marios_wing_cap_geo

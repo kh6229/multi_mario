@@ -347,4 +347,12 @@ extern const Gfx white_particle_small_unused_dl[];
 
 #include "end_gate/geo_header.h"
 
+#include "exclamation_point/geo_header.h"
+
+#include "exclamation_point_2/geo_header.h"
+
+#include "mini_mario_button/geo_header.h"
+
+#include "mini_mario_button/collision_header.h"
+
 #endif

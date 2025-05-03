@@ -1,0 +1,7 @@
+extern const GeoLayout exclamation_point_geo[];
+extern Vtx exclamation_point_Exclamation_Point_mesh_layer_5_vtx_cull[8];
+extern Vtx exclamation_point_Exclamation_Point_mesh_layer_5_vtx_0[35];
+extern Gfx exclamation_point_Exclamation_Point_mesh_layer_5_tri_0[];
+extern Gfx mat_exclamation_point_f3dlite_material[];
+extern Gfx mat_revert_exclamation_point_f3dlite_material[];
+extern Gfx exclamation_point_Exclamation_Point_mesh_layer_5[];

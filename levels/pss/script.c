@@ -45,6 +45,7 @@ const LevelScript level_pss_entry[] = {
 		OBJECT(MODEL_NONE, -4000, 0, 2000, 0, 0, 0, (COOP_CM_NPC << 16), bhvSpawnCoopMario),
 		OBJECT(MODEL_NONE, -4000, 0, 1500, 0, 0, 0, (COOP_CM_NPC << 16), bhvSpawnCoopMario),
 		OBJECT(MODEL_NONE, -4000, 0, 1000, 0, 0, 0, (COOP_CM_NPC << 16), bhvSpawnCoopMario),
+		OBJECT(MODEL_NONE, 0, 0, 0, 0, 0, 0, 0x00010000, bhvTextTrigger),
 		OBJECT(MODEL_NONE, 0, 100, 0, 0, 0, 0, (0x0A << 16), bhvSpinAirborneWarp),
 		TERRAIN(pss_area_1_collision),
 		MACRO_OBJECTS(pss_area_1_macro_objs),

@@ -34,6 +34,8 @@
 #include "rumble_init.h"
 #include "mario_coop.h"
 
+#include "hud.h"
+
 /**
  * @file obj_behaviors.c
  * This file contains a portion of the obj behaviors and many helper functions for those
@@ -776,3 +778,4 @@ UNUSED s32 debug_sequence_tracker(s16 debugInputSequence[]) {
 #include "behaviors/mips.inc.c"
 #include "behaviors/yoshi.inc.c"
 #include "behaviors/end_gate.inc.c"
+#include "behaviors/text_trigger.inc.c"

@@ -22,3 +22,6 @@
 #include "doubleCherry/geo.inc.c"
 #include "mini_mario/geo.inc.c"
 #include "end_gate/geo.inc.c"
+#include "exclamation_point/geo.inc.c"
+#include "exclamation_point_2/geo.inc.c"
+#include "mini_mario_button/geo.inc.c"

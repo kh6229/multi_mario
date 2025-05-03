@@ -6076,7 +6076,7 @@ const BehaviorScript bhvIntroScene[] = {
 
 const BehaviorScript bhvSpawnCoopMario[] = {
     BEGIN(OBJ_LIST_DEFAULT),
-    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW),
     CALL_NATIVE(bhv_coop_spawn_mario),
     BEGIN_LOOP(),
     END_LOOP(),
@@ -6138,6 +6138,25 @@ const BehaviorScript bhvEndGate[] = {
     CALL_NATIVE(bhv_end_gate_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_end_gate_loop),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
+
+const BehaviorScript bhvTextTrigger[] = {
+    BEGIN(OBJ_LIST_DEFAULT),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_COMPUTE_DIST_TO_MARIO),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_text_trigger_loop),
+    END_LOOP(),
+};
+
+const BehaviorScript bhvMiniMarioButton[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_COMPUTE_DIST_TO_MARIO),
+    LOAD_COLLISION_DATA(mini_mario_button_collision),
+    DROP_TO_FLOOR(),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_mini_mario_button_loop),
         CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
 };

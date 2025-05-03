@@ -547,5 +547,7 @@ extern const BehaviorScript bhvWeightPlateNumber[];
 extern const BehaviorScript bhvRaisePlatform[];
 extern const BehaviorScript bhvDoubleCherry[];
 extern const BehaviorScript bhvEndGate[];
+extern const BehaviorScript bhvTextTrigger[];
+extern const BehaviorScript bhvMiniMarioButton[];
 
 #endif // BEHAVIOR_DATA_H

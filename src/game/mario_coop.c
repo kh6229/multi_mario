@@ -26,7 +26,7 @@ int gCoopActiveMarioIndex = 0;
 Spawns a Mario at the specified position with a specific player ID.
 Returns the MarioState of the spawned Mario, NULL if the ID is already used.
 */
-struct MarioState * coop_spawn_mario_with_id(Vec3f pos, int marioID, int control_mode, ModelID32 model) {
+struct MarioState * coop_spawn_mario_with_id(Vec3f pos, int marioID, int control_mode, ModelID32 model, s16 yaw) {
     if (gMarioStates[marioID].marioObj != NULL) {return NULL;} // Slot already used
 
     gCoopActiveMarios++;
@@ -46,6 +46,8 @@ struct MarioState * coop_spawn_mario_with_id(Vec3f pos, int marioID, int control
         gMarioStates[marioID].health = 0x110;
     }
 
+    gMarioStates[marioID].faceAngle[1] = yaw;
+
     return &gMarioStates[marioID];
 }
 
@@ -53,11 +55,11 @@ struct MarioState * coop_spawn_mario_with_id(Vec3f pos, int marioID, int control
 Spawns a Mario at the specified position using any empty ID.
 Returns the MarioState of the spawned Mario, NULL if Mario count is maxed out.
 */
-struct MarioState * coop_spawn_mario(Vec3f pos, int control_mode, ModelID32 model) {
+struct MarioState * coop_spawn_mario(Vec3f pos, int control_mode, ModelID32 model, s16 yaw) {
     for (int i = 0; i < COOP_MARIO_STATES_MAX; i ++) {
         // Search for a uninitialized mario
         if (gMarioStates[i].marioObj == NULL) {
-            return coop_spawn_mario_with_id(pos,i,control_mode, model);
+            return coop_spawn_mario_with_id(pos,i,control_mode, model, yaw);
         }
     }
 
@@ -189,6 +191,18 @@ void coop_npc_jump(struct MarioState * m) {
     }
 }
 
+void coop_npc_standing(struct MarioState * m) {
+    m->intendedYaw = m->faceAngle[1];
+    struct Object * button = cur_obj_nearest_object_with_behavior(bhvMiniMarioButton);
+    if (button != NULL) {
+        if (button->oButtonPressed > 0) {
+            m->npcState = NPC_STATE_WALKING;
+        }
+    } else {
+        m->npcState = NPC_STATE_WALKING;
+    }
+}
+
 void coop_npc_behavior(struct MarioState * m) {
     if (m->turnCooldown > 0) { // Subtract the turn cooldown
         m->turnCooldown--;
@@ -200,7 +214,7 @@ void coop_npc_behavior(struct MarioState * m) {
 
     switch (m->npcState) {
         case NPC_STATE_STANDING:
-            m->npcState = NPC_STATE_WALKING; // Placeholder, makes sure NPC starts walking when spawned
+            coop_npc_standing(m);
             break;
         
         case NPC_STATE_WALKING:

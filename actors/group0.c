@@ -39,3 +39,7 @@
 #include "mini_mario/model.inc.c"
 #include "end_gate/collision.inc.c"
 #include "end_gate/model.inc.c"
+#include "exclamation_point/model.inc.c"
+#include "exclamation_point_2/model.inc.c"
+#include "mini_mario_button/model.inc.c"
+#include "mini_mario_button/collision.inc.c"

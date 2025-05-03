@@ -34,6 +34,8 @@
 #include "rumble_init.h"
 #include "mario_coop.h"
 
+#include "hud.h"
+
 
 /**************************************************
  *                    ANIMATIONS                  *
@@ -1922,4 +1924,6 @@ void init_mario_from_save_file(struct MarioState *m, int playerId) {
 
     gHudDisplay.coins = 0;
     gHudDisplay.wedges = 8;
+
+    gTextIsRendering = 0;
 }

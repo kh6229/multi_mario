@@ -115,6 +115,8 @@ s32 sBreathMeterVisibleTimer = 0;
 
 static struct CameraHUD sCameraHUD = { CAM_STATUS_NONE };
 
+u8 gTextIsRendering = 0;
+
 /**
  * Renders a rgba16 16x16 glyph texture from a table list.
  */
@@ -535,42 +537,21 @@ void render_hud_camera_status(void) {
     gSPDisplayList(gDisplayListHead++, dl_hud_img_end);
 }
 
-void render_coop_debug(void) {
-    char textBytes[64];
-    print_set_envcolour(255, 255, 0, 255);
-    sprintf(textBytes, "Direction:");
-    print_small_text_light(10, 10, textBytes, PRINT_TEXT_ALIGN_LEFT, PRINT_ALL, FONT_OUTLINE);
-    print_set_envcolour(255, 255, 255, 255);
-    sprintf(textBytes, "%i", gMarioStates[1].faceAngle[1]);
-    print_small_text_light(90, 10, textBytes, PRINT_TEXT_ALIGN_LEFT, PRINT_ALL, FONT_OUTLINE);
+const char *dialogIDs[] = {
+    "NULL",
+    "Wow! You're smack in the middle of the battlefield.\nYou can find where the minis are by pressing L.\nTry it now!",
+    "This switch activates the minis.\nThis makes them start walking on their own.\nThere's no turning them off once you activate them.",
+};
 
-    print_set_envcolour(255, 255, 0, 255);
-    sprintf(textBytes, "Magnitude:");
-    print_small_text_light(10, 20, textBytes, PRINT_TEXT_ALIGN_LEFT, PRINT_ALL, FONT_OUTLINE);
-    print_set_envcolour(255, 255, 255, 255);
-    sprintf(textBytes, "%2.2f", gMarioStates[1].intendedMag);
-    print_small_text_light(90, 20, textBytes, PRINT_TEXT_ALIGN_LEFT, PRINT_ALL, FONT_OUTLINE);
+void render_dialog_box(u8 id) {
+    prepare_blank_box();
+    render_blank_box_rounded(10, 150, (SCREEN_WIDTH - 10), (SCREEN_HEIGHT - 10), 0, 0, 64, 128);
+    finish_blank_box();
 
-    print_set_envcolour(255, 255, 0, 255);
-    sprintf(textBytes, "NPC 1 State:");
-    print_small_text_light(10, 30, textBytes, PRINT_TEXT_ALIGN_LEFT, PRINT_ALL, FONT_OUTLINE);
+    char textBytes[256];
+    sprintf(textBytes, dialogIDs[id]);
     print_set_envcolour(255, 255, 255, 255);
-    sprintf(textBytes, "%i", gMarioStates[1].npcState);
-    print_small_text_light(90, 30, textBytes, PRINT_TEXT_ALIGN_LEFT, PRINT_ALL, FONT_OUTLINE);
-
-    print_set_envcolour(255, 255, 0, 255);
-    sprintf(textBytes, "Cooldown:");
-    print_small_text_light(10, 40, textBytes, PRINT_TEXT_ALIGN_LEFT, PRINT_ALL, FONT_OUTLINE);
-    print_set_envcolour(255, 255, 255, 255);
-    sprintf(textBytes, "%i", gMarioStates[1].turnCooldown);
-    print_small_text_light(90, 40, textBytes, PRINT_TEXT_ALIGN_LEFT, PRINT_ALL, FONT_OUTLINE);
-
-    print_set_envcolour(255, 255, 0, 255);
-    sprintf(textBytes, "NPC 1 HP:");
-    print_small_text_light(10, 50, textBytes, PRINT_TEXT_ALIGN_LEFT, PRINT_ALL, FONT_OUTLINE);
-    print_set_envcolour(255, 255, 255, 255);
-    sprintf(textBytes, "%i", gMarioStates[1].health);
-    print_small_text_light(90, 50, textBytes, PRINT_TEXT_ALIGN_LEFT, PRINT_ALL, FONT_OUTLINE);
+    print_small_text_light((SCREEN_WIDTH / 2), 164, textBytes, PRINT_TEXT_ALIGN_CENTRE, PRINT_ALL, FONT_VANILLA);
 }
 
 /**
@@ -653,7 +634,9 @@ void render_hud(void) {
             render_debug_mode();
         }
 #endif
+    }
 
-        render_coop_debug();
+    if (gTextIsRendering > 0) {
+        render_dialog_box(gTextIsRendering);
     }
 }

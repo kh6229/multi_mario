@@ -17,6 +17,8 @@
 #include "surface_terrains.h"
 #include "rumble_init.h"
 
+#include "mario_coop.h"
+
 s32 check_common_idle_cancels(struct MarioState *m) {
     mario_drop_held_object(m);
     if (m->floor->normal.y < COS73) {
@@ -112,7 +114,7 @@ s32 act_idle(struct MarioState *m) {
         return set_mario_action(m, ACT_COUGHING, 0);
     }
 
-    if (!(m->actionArg & 1) && m->health < 0x300) {
+    if (!(m->actionArg & 1) && m->health < 0x300 && m->controlMode != COOP_CM_NPC) {
         return set_mario_action(m, ACT_PANTING, 0);
     }
 
