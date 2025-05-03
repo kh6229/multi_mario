@@ -1266,8 +1266,10 @@
 #define /*0x0F4*/ oButtonPressed OBJECT_FIELD_S32(0x1B)
 
 /* Turn Plane */
-#define /*0x0F4*/ oTurnPlaneType OBJECT_FIELD_S32(0x1B)
-#define /*     */ oTurnPlaneYaw  OBJECT_FIELD_S32(0x1C)
+#define /*0x0F4*/ oTurnPlaneType           OBJECT_FIELD_S32(0x1B)
+#define           oTurnPlaneYaw            OBJECT_FIELD_S16(0x1D, 0)
+#define           oTurnPlaneMariosTurned   OBJECT_FIELD_S32(0x1F)
+#define           oTurnPlaneMiniMarioCount OBJECT_FIELD_S32(0x21)
 
 /*Custom general defines:
 

@@ -2672,6 +2672,12 @@ enum animIDsFirePiranhaPlant {
     #define WHITE_PUFF_EXPLODE_BP_FAST_FADE                 0x2
     #define WHITE_PUFF_EXPLODE_BP_SLOW_FADE                 0x3
 
+/* Turn Plane */
+    /* oBehParams2ndByte */
+    #define TURN_PLANE_TYPE_STAY                            0x0
+    #define TURN_PLANE_TYPE_180                             0x1
+    #define TURN_PLANE_TYPE_DELETE                          0x2
+
 /* Dirt Particle */
 enum oAnimStatesTinyDirtParticle {
     TINY_DIRT_PARTICLE_ANIM_STATE_RED,

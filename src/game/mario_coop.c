@@ -120,22 +120,11 @@ int coop_delete_mario(struct MarioState * m) {
 }
 
 void coop_npc_walking(struct MarioState * m) {
-    if (m->floor != SURFACE_DEFAULT) { // If floor isn't default...
-        switch (m->floor->type) {      // Decide which way to turn based on floor type
-            case SURFACE_NOISE_DEFAULT:
-                m->npcState = NPC_FLOOR_TURN_LEFT;
-                break;
-            
-            case SURFACE_HARD:
-                m->npcState = NPC_FLOOR_TURN_RIGHT;
-                break;
-
-            case SURFACE_HARD_SLIPPERY:
-                m->npcState = NPC_FLOOR_TURN_AROUND;
-                break;
-
-            default:
-                break;
+    struct Object * plane = cur_obj_nearest_object_with_behavior(bhvTurnPlane);
+    if (plane != NULL) {
+        if (m->marioObj->platform == plane) {
+            m->floorTurnYaw = plane->oTurnPlaneYaw;
+            m->npcState = NPC_STATE_FLOOR_TURN;
         }
     }
     
@@ -159,13 +148,11 @@ void coop_npc_wall_turn(struct MarioState * m) {
     m->npcState = NPC_STATE_WALKING;
 }
 
-void coop_npc_floor_turn(struct MarioState * m, int ct) {
+void coop_npc_floor_turn(struct MarioState * m, s16 yaw) {
     m->input |= INPUT_NONZERO_ANALOG; // Allows him to move
     if (m->turnCooldown == 0) {
-        for (int i = 0; i < ct; i++) {
-            m->faceAngle[1] += 0x2000;
-            m->intendedYaw = m->faceAngle[1];
-        }
+        m->faceAngle[1] += yaw;
+        m->intendedYaw = m->faceAngle[1];
         m->turnCooldown = 30;
     }
     m->npcState = NPC_STATE_WALKING;
@@ -225,16 +212,8 @@ void coop_npc_behavior(struct MarioState * m) {
             coop_npc_wall_turn(m);
             break;
 
-        case NPC_FLOOR_TURN_LEFT:
-            coop_npc_floor_turn(m, 2);
-            break;
-
-        case NPC_FLOOR_TURN_RIGHT:
-            coop_npc_floor_turn(m, 6);
-            break;
-
-        case NPC_FLOOR_TURN_AROUND:
-            coop_npc_floor_turn(m, 4);
+        case NPC_STATE_FLOOR_TURN:
+            coop_npc_floor_turn(m, m->floorTurnYaw);
             break;
 
         case NPC_STATE_JUMP:

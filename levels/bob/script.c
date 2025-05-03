@@ -54,7 +54,7 @@ const LevelScript level_bob_entry[] = {
 		OBJECT(MODEL_EXCLAMATION_POINT_2, -272, 781, 187, 0, 0, 0, (0x02 << 16), bhvTextTrigger),
 		OBJECT(MODEL_BOB_BUBBLY_TREE, 1551, 100, 693, 0, 0, 0, 0x00000000, bhvTree),
 		OBJECT(MODEL_BOB_BUBBLY_TREE, 1423, 113, -800, 0, 0, 0, 0x00000000, bhvTree),
-		OBJECT(MODEL_TURN_PLANE, 267, -155, -2982, 0, 0, 0, 0x00004000, bhvTurnPlane),
+		OBJECT(MODEL_TURN_PLANE, 638, -155, -2982, 0, 0, 0, 0x00004000, bhvTurnPlane),
 		OBJECT(MODEL_NONE, 2035, 737, 2144, 0, 0, 0, (0x0A << 16), bhvSpinAirborneWarp),
 		TERRAIN(bob_area_1_collision),
 		MACRO_OBJECTS(bob_area_1_macro_objs),
