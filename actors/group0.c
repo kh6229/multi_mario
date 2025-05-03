@@ -43,3 +43,5 @@
 #include "exclamation_point_2/model.inc.c"
 #include "mini_mario_button/model.inc.c"
 #include "mini_mario_button/collision.inc.c"
+#include "turn_plane/collision.inc.c"
+#include "turn_plane/model.inc.c"

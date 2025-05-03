@@ -355,4 +355,8 @@ extern const Gfx white_particle_small_unused_dl[];
 
 #include "mini_mario_button/collision_header.h"
 
+#include "turn_plane/collision_header.h"
+
+#include "turn_plane/geo_header.h"
+
 #endif

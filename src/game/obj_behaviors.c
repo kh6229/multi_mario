@@ -779,3 +779,4 @@ UNUSED s32 debug_sequence_tracker(s16 debugInputSequence[]) {
 #include "behaviors/yoshi.inc.c"
 #include "behaviors/end_gate.inc.c"
 #include "behaviors/text_trigger.inc.c"
+#include "behaviors/turn_plane.inc.c"

@@ -1265,6 +1265,10 @@
 /* Mini Mario Button */
 #define /*0x0F4*/ oButtonPressed OBJECT_FIELD_S32(0x1B)
 
+/* Turn Plane */
+#define /*0x0F4*/ oTurnPlaneType OBJECT_FIELD_S32(0x1B)
+#define /*     */ oTurnPlaneYaw  OBJECT_FIELD_S32(0x1C)
+
 /*Custom general defines:
 
 For general s32 ints, use o->oF4, oF8, oFC, o100, o104, o108, o10C, and o110

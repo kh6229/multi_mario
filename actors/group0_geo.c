@@ -25,3 +25,4 @@
 #include "exclamation_point/geo.inc.c"
 #include "exclamation_point_2/geo.inc.c"
 #include "mini_mario_button/geo.inc.c"
+#include "turn_plane/geo.inc.c"
