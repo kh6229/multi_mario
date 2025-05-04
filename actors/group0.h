@@ -359,4 +359,8 @@ extern const Gfx white_particle_small_unused_dl[];
 
 #include "turn_plane/geo_header.h"
 
+#include "direction_plate/collision_header.h"
+
+#include "direction_plate/geo_header.h"
+
 #endif

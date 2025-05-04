@@ -106,7 +106,7 @@ int coop_delete_mario(struct MarioState * m) {
         return FALSE; // Returns FALSE (Game Over) when every Mario is dead.
     }
     #ifdef COOP_MAIN_MARIO_MUST_LIVE
-    if (m==gMarioState) {
+    if (m==gMarioState || m->controlMode == COOP_CM_NPC) {
         m->isDead = TRUE;
         return FALSE; // Returns FALSE (Game Over) when primary Mario has died.
     }

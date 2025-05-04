@@ -1,7 +1,13 @@
 void bhv_text_trigger_loop(void) {
     struct MarioState * m = &gMarioStates[0];
-    if (is_point_close_to_object(m->marioObj, o->oPosX, o->oPosY, o->oPosZ, 400)) {
-        gTextIsRendering = o->oBehParams2ndByte;
+    f32 dist = lateral_dist_between_objects(o, m->marioObj);
+
+    if (dist < 800) {
+        if (dist < 400 ) {
+            gTextIsRendering = o->oBehParams2ndByte;
+        } else {
+            gTextIsRendering = 0;
+        }
     }
 
     o->oFaceAngleYaw += 0x200;

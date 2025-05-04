@@ -19,6 +19,7 @@
 #include "puppyprint.h"
 
 #include "mario_coop.h"
+#include "obj_behaviors.h"
 
 #include "config.h"
 
@@ -537,11 +538,25 @@ void render_hud_camera_status(void) {
     gSPDisplayList(gDisplayListHead++, dl_hud_img_end);
 }
 
+void render_debug_stats(void) {
+    char textBytes[64];
+    sprintf(textBytes, "gTextIsRendering: %i", gTextIsRendering);
+    print_set_envcolour(255, 255, 255, 255);
+    print_small_text_light(10, 10, textBytes, PRINT_TEXT_ALIGN_LEFT, PRINT_ALL, FONT_OUTLINE);
+    sprintf(textBytes, "Mario X: %2.2f", gMarioStates[0].pos[0]);
+    print_small_text_light(10, 20, textBytes, PRINT_TEXT_ALIGN_LEFT, PRINT_ALL, FONT_OUTLINE);
+    sprintf(textBytes, "Mario Y: %2.2f", gMarioStates[0].pos[1]);
+    print_small_text_light(10, 30, textBytes, PRINT_TEXT_ALIGN_LEFT, PRINT_ALL, FONT_OUTLINE);
+    sprintf(textBytes, "Mario Z: %2.2f", gMarioStates[0].pos[2]);
+    print_small_text_light(10, 40, textBytes, PRINT_TEXT_ALIGN_LEFT, PRINT_ALL, FONT_OUTLINE);
+}
+
 const char *dialogIDs[] = {
     "NULL",
     "Wow! You're smack in the middle of the battlefield.\nYou can find where the Mini Marios are by pressing L.\nTry it now!",
     "This switch activates the Mini Marios.\nThis makes them start walking on their own.\nThere's no turning them off once you activate them.",
-    "Watch out! Mini Marios only have one health.\nMake sure you get enemies out of the way of them.\nIf one dies, it's game over.",
+    "Watch out! Mini Marios only have one health.\nMake sure you get enemies out of their way.\nIf one dies, it's game over.",
+    "You can change which direction the Mini Marios turn\nby turning this direction plate! Ground pound it to change directions.\nTry to get them up the mountain using these."
 };
 
 void render_dialog_box(u8 id) {
@@ -640,4 +655,6 @@ void render_hud(void) {
     if (gTextIsRendering > 0) {
         render_dialog_box(gTextIsRendering);
     }
+
+    //render_debug_stats();
 }

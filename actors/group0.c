@@ -45,3 +45,5 @@
 #include "mini_mario_button/collision.inc.c"
 #include "turn_plane/collision.inc.c"
 #include "turn_plane/model.inc.c"
+#include "direction_plate/collision.inc.c"
+#include "direction_plate/model.inc.c"

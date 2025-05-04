@@ -35,7 +35,7 @@ void bobomb_act_explode(void) {
         explosion->oGraphYOffset += 100.0f;
 
         bobomb_spawn_coin();
-        create_respawner(MODEL_BLACK_BOBOMB, bhvBobomb, 3000);
+        // create_respawner(MODEL_BLACK_BOBOMB, bhvBobomb, 3000);
 
         o->activeFlags = ACTIVE_FLAG_DEACTIVATED;
     }
@@ -64,12 +64,37 @@ void bobomb_check_interactions(void) {
     }
 }
 
+s8 bobomb_check_for_any_mario(void) {
+    for (u8 i = 0; i < COOP_MARIO_STATES_MAX; i++) {
+        struct MarioState * m = &gMarioStates[i];
+        if (m->marioObj == NULL) {continue;}
+
+        if (obj_check_if_facing_toward_angle(o->oMoveAngleYaw, obj_angle_to_object(o, m->marioObj), 0x2000)) {
+            o->oBobombTargetMario = i;
+            return i;
+        }
+    }
+    return -1;
+}
+
 void bobomb_act_patrol(void) {
     o->oForwardVel = 5.0f;
 
     s16 collisionFlags = object_step();
+    
+    for (u8 i = 0; i < COOP_MARIO_STATES_MAX; i++) {
+        struct MarioState * m = &gMarioStates[i];
+        if (m->marioObj == NULL) {continue;}
+
+        if (obj_check_if_collided_with_object(o, m->marioObj)) {
+            o->oBobombFuseLit = TRUE;
+            o->oBobombTargetMario = i;
+            o->oAction = BOBOMB_ACT_CHASE_MARIO;
+        }
+    }
+
     if (obj_return_home_if_safe(o, o->oHomeX, o->oHomeY, o->oHomeZ, 400)
-     && obj_check_if_facing_toward_angle(o->oMoveAngleYaw, o->oAngleToMario, 0x4000)) {
+     && bobomb_check_for_any_mario() > -1) {
         o->oBobombFuseLit = TRUE;
         o->oAction = BOBOMB_ACT_CHASE_MARIO;
     }
@@ -77,7 +102,7 @@ void bobomb_act_patrol(void) {
     obj_check_floor_death(collisionFlags, sObjFloor);
 }
 
-void bobomb_act_chase_mario(void) {
+void bobomb_act_chase_mario(s8 target) {
     s16 animFrame = ++o->header.gfx.animInfo.animFrame;
 
     o->oForwardVel = 20.0f;
@@ -87,7 +112,9 @@ void bobomb_act_chase_mario(void) {
         cur_obj_play_sound_2(SOUND_OBJ_BOBOMB_WALK);
     }
 
-    obj_turn_toward_object(o, gMarioObject, O_MOVE_ANGLE_YAW_INDEX, 0x800);
+    struct Object *mario = gMarioStates[target].marioObj;
+
+    obj_turn_toward_object(o, mario, O_MOVE_ANGLE_YAW_INDEX, 0x800);
     obj_check_floor_death(collisionFlags, sObjFloor);
 }
 
@@ -109,7 +136,7 @@ void generic_bobomb_free_loop(void) {
             break;
 
         case BOBOMB_ACT_CHASE_MARIO:
-            bobomb_act_chase_mario();
+            bobomb_act_chase_mario(o->oBobombTargetMario);
             break;
 
         case BOBOMB_ACT_EXPLODE:

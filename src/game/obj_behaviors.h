@@ -38,7 +38,7 @@ void bobomb_spawn_coin(void);
 void bobomb_act_explode(void);
 void bobomb_check_interactions(void);
 void bobomb_act_patrol(void);
-void bobomb_act_chase_mario(void);
+void bobomb_act_chase_mario(s8 target);
 void bobomb_act_launched(void);
 void generic_bobomb_free_loop(void);
 void stationary_bobomb_free_loop(void);

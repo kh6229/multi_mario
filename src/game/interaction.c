@@ -1637,7 +1637,7 @@ u32 interact_grabbable(struct MarioState *m, u32 interactType, struct Object *ob
         }
     }
 
-    if (script != bhvBowser) {
+    if (script != bhvBowser && m->controlMode != COOP_CM_NPC) {
         push_mario_out_of_object(m, obj, -5.0f);
     }
 
