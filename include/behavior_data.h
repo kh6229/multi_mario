@@ -550,5 +550,6 @@ extern const BehaviorScript bhvEndGate[];
 extern const BehaviorScript bhvTextTrigger[];
 extern const BehaviorScript bhvMiniMarioButton[];
 extern const BehaviorScript bhvTurnPlane[];
+extern const BehaviorScript bhvDirectionPlate[];
 
 #endif // BEHAVIOR_DATA_H

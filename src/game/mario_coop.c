@@ -129,6 +129,14 @@ void coop_npc_walking(struct MarioState * m) {
             m->npcState = NPC_STATE_FLOOR_TURN;
         }
     }
+
+    struct Object * dplate = cur_obj_nearest_object_with_behavior(bhvDirectionPlate);
+    if (dplate != NULL) {
+        if (m->marioObj->platform == dplate) {
+            m->plateTurnYaw = dplate->oFaceAngleYaw;
+            m->npcState = NPC_STATE_PLATE_TURN;
+        }
+    }
     
     if (m->wall != NULL) {
         s16 jump_height = 200;
@@ -154,6 +162,16 @@ void coop_npc_floor_turn(struct MarioState * m, s16 yaw) {
     m->input |= INPUT_NONZERO_ANALOG; // Allows him to move
     if (m->turnCooldown == 0) {
         m->faceAngle[1] += yaw;
+        m->intendedYaw = m->faceAngle[1];
+        m->turnCooldown = 30;
+    }
+    m->npcState = NPC_STATE_WALKING;
+}
+
+void coop_npc_plate_turn(struct MarioState * m, s16 yaw) {
+    m->input |= INPUT_NONZERO_ANALOG; // Allows him to move
+    if (m->turnCooldown == 0) {
+        m->faceAngle[1] = yaw;
         m->intendedYaw = m->faceAngle[1];
         m->turnCooldown = 30;
     }
@@ -221,6 +239,9 @@ void coop_npc_behavior(struct MarioState * m) {
         case NPC_STATE_JUMP:
             coop_npc_jump(m);
             break;
+
+        case NPC_STATE_PLATE_TURN:
+            coop_npc_plate_turn(m, m->plateTurnYaw);
     }
 }
 

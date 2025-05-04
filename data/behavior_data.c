@@ -6171,3 +6171,13 @@ const BehaviorScript bhvTurnPlane [] = {
         CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
 };
+
+const BehaviorScript bhvDirectionPlate [] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    LOAD_COLLISION_DATA(direction_plate_collision),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_direction_plate_loop),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};

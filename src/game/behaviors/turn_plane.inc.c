@@ -1,3 +1,9 @@
+void bhv_direction_plate_loop(void) {
+    if (cur_obj_is_mario_ground_pounding_platform()) {
+        o->oFaceAngleYaw += 0x4000;
+    }
+}
+
 void bhv_turn_plane_loop(void) {
     switch (o->oAction) {
         case 0:
