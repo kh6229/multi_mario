@@ -8,6 +8,6 @@ extern Vtx end_gate_End_Gate_Visual_mesh_layer_1_vtx_1[24];
 extern Gfx end_gate_End_Gate_Visual_mesh_layer_1_tri_1[];
 extern Gfx mat_end_gate_f3dlite_material_001[];
 extern Gfx mat_revert_end_gate_f3dlite_material_001[];
-extern Gfx mat_end_gate_f3dlite_material[];
-extern Gfx mat_revert_end_gate_f3dlite_material[];
+extern Gfx mat_end_gate_f3dlite_material_002[];
+extern Gfx mat_revert_end_gate_f3dlite_material_002[];
 extern Gfx end_gate_End_Gate_Visual_mesh_layer_1[];

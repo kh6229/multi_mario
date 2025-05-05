@@ -26,7 +26,7 @@ If the game freezes with music still playing from spawning too many Marios, try 
 
 // Comment out to disable
 #define COOP_MAIN_MARIO_MUST_LIVE // If defined, game over when your initial Mario dies
-#define COOP_DEBUG_SPAWN_MARIO_WITH_DDOWN // If defined, spawn Mario when pressing D-Pad down
+// #define COOP_DEBUG_SPAWN_MARIO_WITH_DDOWN // If defined, spawn Mario when pressing D-Pad down
 #define COOP_SNAPPY_SWAP_CAMERA // If defined, camera will swap instantly instead of gradually
 
 #define IS_CONTROLLABLE(controlMode) (controlMode == COOP_CM_TAKE_TURNS || controlMode == COOP_CM_ALL_ACTIVE)

@@ -9,6 +9,9 @@
 #include "effects.h"
 #include "external.h"
 
+#include "game/mario_coop.h"
+#include "game/level_update.h"
+
 void note_set_resampling_rate(struct Note *note, f32 resamplingRateInput);
 
 #if defined(VERSION_EU) || defined(VERSION_SH)
@@ -602,7 +605,17 @@ void process_notes(void) {
             frequency = (frequency < cap ? frequency : cap);
             scale *= 4.3498e-5f; // ~1 / 23000
             velocity = velocity * scale * scale;
-            note_set_frequency(note, frequency);
+
+            if (gMarioState && gMarioState->marioObj) {
+                if (((note->bankId == 0x08) || (note->bankId == 0x0A)) && gMarioState->controlMode == COOP_CM_NPC) {
+                    note_set_frequency(note, frequency * 1.4f);
+                } else {
+                    note_set_frequency(note, frequency);
+                }
+            } else {
+                note_set_frequency(note, frequency);
+            }
+
             note_set_vel_pan_reverb(note, velocity, pan, reverbVol);
             continue;
         }

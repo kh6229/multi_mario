@@ -17,8 +17,7 @@ void bhv_end_gate_loop(void) {
     o->prevObj->oAnimState = mariosEnteredGate;
 
     if (miniMarioCount == 0 && o->oTimer > 90 && starSpawned == 0) {
-        struct MarioState * m = &gMarioStates[0];
-        cur_obj_spawn_star_at_y_offset(m->marioObj->oPosX, (m->marioObj->oPosY + 300.0f), m->marioObj->oPosZ, 0.0f);
+        cur_obj_spawn_star_at_y_offset((o->oPosX + 300.0f), (o->oPosY + 300.0f), o->oPosZ, 0.0f);
         starSpawned++;
     }
 }

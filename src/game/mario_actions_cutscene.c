@@ -227,7 +227,7 @@ s32 get_star_collection_dialog(struct MarioState *m) {
 
 // save menu handler
 void handle_save_menu(struct MarioState *m) {
-    s32 dialogID;
+    //s32 dialogID;
     // wait for the menu to show up
     if (is_anim_past_end(m) && gSaveOptSelectIndex != MENU_OPT_NONE) {
         // save and continue / save and quit
@@ -244,14 +244,14 @@ void handle_save_menu(struct MarioState *m) {
             disable_time_stop();
             m->faceAngle[1] += 0x8000;
             // figure out what dialog to show, if we should
-            dialogID = get_star_collection_dialog(m);
-            if (dialogID) {
-                play_peachs_jingle();
+            //dialogID = get_star_collection_dialog(m);
+            //if (dialogID) {
+                //play_peachs_jingle();
                 // look up for dialog
-                set_mario_action(m, ACT_READING_AUTOMATIC_DIALOG, dialogID);
-            } else {
+                //set_mario_action(m, ACT_READING_AUTOMATIC_DIALOG, dialogID);
+            //} else {
                 set_mario_action(m, ACT_IDLE, 0);
-            }
+            //}
         }
     }
 }
@@ -637,13 +637,13 @@ void general_star_dance_handler(struct MarioState *m, s32 isInWater) {
     } else if (m->actionState == ACT_STATE_STAR_DANCE_RETURN && is_anim_at_end(m)) {
         disable_time_stop();
         enable_background_sound();
-        s32 dialogID = get_star_collection_dialog(m);
-        if (dialogID) {
+        //s32 dialogID = get_star_collection_dialog(m);
+        //if (dialogID) {
             // look up for dialog
-            set_mario_action(m, ACT_READING_AUTOMATIC_DIALOG, dialogID);
-        } else {
+           //set_mario_action(m, ACT_READING_AUTOMATIC_DIALOG, dialogID);
+        //} else {
             set_mario_action(m, isInWater ? ACT_WATER_IDLE : ACT_IDLE, 0);
-        }
+        //}
     }
 }
 

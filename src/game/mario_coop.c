@@ -148,7 +148,7 @@ void coop_npc_walking(struct MarioState * m) {
     }
     
     m->input |= INPUT_NONZERO_ANALOG; // Allows him to move
-    m->intendedMag = 8.0f; // Always going slow
+    m->intendedMag = 10.0f; // Always going slow
 }
 
 void coop_npc_wall_turn(struct MarioState * m) {

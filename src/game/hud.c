@@ -556,7 +556,8 @@ const char *dialogIDs[] = {
     "Wow! You're smack in the middle of the battlefield.\nYou can find where the Mini Marios are by pressing L.\nTry it now!",
     "This switch activates the Mini Marios.\nThis makes them start walking on their own.\nThere's no turning them off once you activate them.",
     "Watch out! Mini Marios only have one health.\nMake sure you get enemies out of their way.\nIf one dies, it's game over.",
-    "You can change which direction the Mini Marios turn\nby turning this direction plate! Ground pound it to change directions.\nTry to get them up the mountain using these."
+    "You can change which direction the Mini Marios turn\nby rotating this direction plate!\nGround pound it to change directions.\nTry to get them up the mountain using these.",
+    "\nThere are three red coins in each level.\n Collect them all for a bonus star!",
 };
 
 void render_dialog_box(u8 id) {

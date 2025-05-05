@@ -47,13 +47,13 @@ void bhv_turn_plane_loop(void) {
             }
             break;
     }
-    o->prevObj->oAnimState = o->oTurnPlaneMariosTurned;
+    //o->prevObj->oAnimState = o->oTurnPlaneMariosTurned;
 }
 
 void bhv_turn_plane_init(void) {
-    o->prevObj = spawn_object(o,MODEL_NUMBER,bhvWeightPlateNumber);
-    o->prevObj->oPosY += 400.0f;
-    o->prevObj->oAnimState = 0;
+    //o->prevObj = spawn_object(o,MODEL_NUMBER,bhvWeightPlateNumber);
+    //o->prevObj->oPosY += 400.0f;
+    //o->prevObj->oAnimState = 0;
 
     o->oTurnPlaneType         = o->oBehParams2ndByte;
     o->oTurnPlaneYaw          = GET_BPARAM34(o->oBehParams);
