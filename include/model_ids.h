@@ -4,6 +4,7 @@
 #define MODEL_NONE                             0x00
 
 /* fast64 object exports get inserted here */
+#define MODEL_JUMP_PLANE                  232
 #define MODEL_DIRECTION_PLATE             231
 #define MODEL_TURN_PLANE                  230
 #define MODEL_MINI_MARIO_BUTTON           229

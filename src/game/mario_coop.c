@@ -91,7 +91,7 @@ void coop_give_control_to_next(void) {
 /*
 Deletes the Mario
 */
-int coop_delete_mario(struct MarioState * m) {
+int coop_delete_mario(struct MarioState * m, int died) {
     if (m->marioObj == NULL || m->isDead) {return TRUE;} // Already deleted
 
     if (m != gMarioState) {
@@ -101,22 +101,32 @@ int coop_delete_mario(struct MarioState * m) {
         if (IS_CONTROLLABLE(m->controlMode)) {
             gCoopActiveControllableMarios --;
         }
+        if (died == TRUE) {
+            return FALSE;
+        }
     }
     if (gCoopActiveMarios == 0) {
         return FALSE; // Returns FALSE (Game Over) when every Mario is dead.
     }
-    #ifdef COOP_MAIN_MARIO_MUST_LIVE
-    if (m==gMarioState || m->controlMode == COOP_CM_NPC) {
-        m->isDead = TRUE;
-        return FALSE; // Returns FALSE (Game Over) when primary Mario has died.
-    }
-    #else 
+    //#ifdef COOP_MAIN_MARIO_MUST_LIVE
+    //if (m == gMarioState) {
+    //    m->isDead = TRUE;
+    //    return FALSE; // Returns FALSE (Game Over) when primary Mario has died.
+    //}
+    //#else 
     if (m == gMarioState) {
         m->isDead = TRUE;
-        coop_give_control_to_next();
-        reset_camera(gCurrentArea->camera);
+        if (died == FALSE) {
+            obj_mark_for_deletion(m->marioObj);
+            coop_give_control_to_next();
+            reset_camera(gCurrentArea->camera);
+        } else {
+            return FALSE;
+        }
     }
-    #endif
+    //#endif
+
+
 
     return TRUE;
 }
@@ -137,10 +147,24 @@ void coop_npc_walking(struct MarioState * m) {
             m->npcState = NPC_STATE_PLATE_TURN;
         }
     }
+
+    struct Object *jplane = cur_obj_nearest_object_with_behavior(bhvJumpPlane);
+    if (jplane != NULL) {
+        if (m->marioObj->platform == jplane) { 
+            m->npcState = NPC_STATE_JUMP;
+        }
+    }
+
+    struct Object *endgate = cur_obj_nearest_object_with_behavior(bhvEndGate);
+    if (endgate != NULL) {
+        if (m->marioObj->platform == endgate) { 
+            coop_delete_mario(m, FALSE);
+        }
+    }
     
-    if (m->wall != NULL) {
+    if (m->wall != NULL || m->floor == NULL) {
         s16 jump_height = 200;
-        if (m->wall->upperY <= (m->floor->upperY + jump_height)) { // If the height of the wall is shorter than
+        if (m->wall != NULL && m->wall->upperY <= (m->floor->upperY + jump_height)) { // If the height of the wall is shorter than
             m->npcState = NPC_STATE_JUMP;                          // the jump height, then jump. Else start turning
         } else {
             m->npcState = NPC_STATE_WALL_TURN;

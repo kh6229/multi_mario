@@ -8,7 +8,6 @@ void bhv_end_gate_loop(void) {
         if (m->marioObj != NULL && m->controlMode == COOP_CM_NPC) {
             miniMarioCount++;
             if (m->marioObj->platform == o) {
-                coop_delete_mario(m);
                 mariosEnteredGate++;
             }
         }

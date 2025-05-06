@@ -1,7 +1,20 @@
 void bhv_direction_plate_loop(void) {
-    if (cur_obj_is_mario_ground_pounding_platform()) {
-        o->oFaceAngleYaw += 0x4000;
+    switch (o->oAction) {
+        case 0:
+            o->oDirectionPlateCooldown = 0;
+            o->oAction = 1;
+            break;
+        case 1:
+            if (o->oDirectionPlateCooldown > 0) {
+                o->oDirectionPlateCooldown--;
+            }    
+
+            if (cur_obj_is_mario_ground_pounding_platform() && o->oDirectionPlateCooldown == 0) {
+                o->oFaceAngleYaw += 0x4000;
+                o->oDirectionPlateCooldown = 30;
+            }
     }
+    
 }
 
 void bhv_turn_plane_loop(void) {

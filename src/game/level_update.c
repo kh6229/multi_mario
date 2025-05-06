@@ -727,7 +727,7 @@ s16 level_trigger_warp(struct MarioState *m, s32 warpOp) {
 
     if (warpOp == WARP_OP_DEATH) {
         // I think i could && with short circut eval but just to be safe I won't, gcc be like pmo idgaf
-        if (coop_delete_mario(m)) {
+        if (coop_delete_mario(m, TRUE)) {
             return 0;
         }
     }

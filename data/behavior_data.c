@@ -1781,7 +1781,7 @@ const BehaviorScript bhvHiddenObject[] = {
     BEGIN(OBJ_LIST_SURFACE),
     OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
     LOAD_COLLISION_DATA(breakable_box_seg8_collision),
-    SET_FLOAT(oCollisionDistance, 300),
+    SET_FLOAT(oCollisionDistance, 1000),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_hidden_object_loop),
     END_LOOP(),
@@ -6178,6 +6178,15 @@ const BehaviorScript bhvDirectionPlate [] = {
     LOAD_COLLISION_DATA(direction_plate_collision),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_direction_plate_loop),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
+
+const BehaviorScript bhvJumpPlane [] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_COMPUTE_DIST_TO_MARIO),
+    LOAD_COLLISION_DATA(jump_plane_collision),
+    BEGIN_LOOP(),
         CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
 };

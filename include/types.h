@@ -477,6 +477,7 @@ enum NpcStates {
     NPC_STATE_FLOOR_TURN,
     NPC_STATE_JUMP,
     NPC_STATE_PLATE_TURN,
+    NPC_STATE_GAP_JUMP,
 };
 
 #endif // TYPES_H

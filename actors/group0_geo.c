@@ -27,3 +27,4 @@
 #include "mini_mario_button/geo.inc.c"
 #include "turn_plane/geo.inc.c"
 #include "direction_plate/geo.inc.c"
+#include "jump_plane/geo.inc.c"
