@@ -1468,7 +1468,7 @@ void update_mario_health(struct MarioState *m) {
             }
         }
 
-        if (m->healCounter > 0) {
+        if (m->healCounter > 0 && m->controlMode != COOP_CM_NPC) {
             m->health += 0x40;
             m->healCounter--;
         }

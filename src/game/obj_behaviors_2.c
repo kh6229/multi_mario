@@ -418,7 +418,7 @@ static s32 obj_resolve_object_collisions(s32 *targetYaw) {
         s32 i;
         for (i = 0; i < o->numCollidedObjs; i++) {
             otherObject = o->collidedObjs[i];
-            if (otherObject == gMarioObject) continue;
+            if (otherObject->oFlags & OBJ_FLAG_IS_A_MARIO) continue;
             if (otherObject->oInteractType & INTERACT_MASK_NO_OBJ_COLLISIONS) continue;
 
             dx = o->oPosX - otherObject->oPosX;

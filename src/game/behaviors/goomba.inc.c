@@ -160,6 +160,19 @@ static void mark_goomba_as_dead(void) {
     }
 }
 
+int goomba_check_for_marios(void) {
+    for (u8 i = 0; i < COOP_MARIO_STATES_MAX; i++) {
+        struct MarioState * m = &gMarioStates[i];
+        if (m->marioObj == NULL) {continue;}
+
+        if (lateral_dist_between_objects(o, m->marioObj) <= 500.0f) {
+            o->oGoombaTargetMario = i;
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
+
 /**
  * Walk around randomly occasionally jumping. If mario comes within range,
  * chase him.
@@ -192,7 +205,7 @@ static void goomba_act_walk(void) {
 
         if (!(o->oGoombaTurningAwayFromWall =
                   obj_bounce_off_walls_edges_objects(&o->oGoombaTargetYaw))) {
-            if (o->oDistanceToMario < 500.0f) {
+            if (goomba_check_for_marios() == TRUE) {
                 // If close to mario, begin chasing him. If not already chasing
                 // him, jump first
 
@@ -200,7 +213,7 @@ static void goomba_act_walk(void) {
                     goomba_begin_jump();
                 }
 
-                o->oGoombaTargetYaw = o->oAngleToMario;
+                o->oGoombaTargetYaw = obj_angle_to_object(o, gMarioStates[o->oGoombaTargetMario].marioObj);
                 o->oGoombaRelativeSpeed = 20.0f;
             } else {
                 // If mario is far away, walk at a normal pace, turning randomly

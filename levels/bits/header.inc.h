@@ -28,7 +28,7 @@ extern Vtx bits_dl_Level_Mesh_mesh_layer_1_vtx_5[40];
 extern Gfx bits_dl_Level_Mesh_mesh_layer_1_tri_5[];
 extern Vtx bits_dl_Level_Mesh_mesh_layer_1_vtx_6[628];
 extern Gfx bits_dl_Level_Mesh_mesh_layer_1_tri_6[];
-extern Vtx bits_dl_Level_Mesh_mesh_layer_1_vtx_7[63];
+extern Vtx bits_dl_Level_Mesh_mesh_layer_1_vtx_7[127];
 extern Gfx bits_dl_Level_Mesh_mesh_layer_1_tri_7[];
 extern Gfx mat_bits_dl_f3dlite_material_001[];
 extern Gfx mat_revert_bits_dl_f3dlite_material_001[];

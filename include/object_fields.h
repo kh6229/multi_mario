@@ -601,6 +601,7 @@
 #define /*0x104*/ oGoombaBlinkTimer          OBJECT_FIELD_S32(0x1F)
 #define /*0x108*/ oGoombaTurningAwayFromWall OBJECT_FIELD_S32(0x20)
 #define /*0x10C*/ oGoombaRelativeSpeed       OBJECT_FIELD_F32(0x21)
+#define           oGoombaTargetMario         OBJECT_FIELD_S32(0x49)
 #ifdef FLOOMBAS
 #define /*0x110*/ oIsFloomba OBJECT_FIELD_S32(0x22)
 
