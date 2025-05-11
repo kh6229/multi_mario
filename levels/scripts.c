@@ -65,6 +65,7 @@ const LevelScript level_main_scripts_entry[] = {
     LOAD_RAW_WITH_CODE( /*seg*/ SEGMENT_COMMON1_GEO,   _common1_geoSegmentRomStart,  _common1_geoSegmentRomEnd, _common1_geoSegmentBssStart, _common1_geoSegmentBssEnd),
     LOAD_RAW_WITH_CODE( /*seg*/ SEGMENT_BEHAVIOR_DATA,    _behaviorSegmentRomStart,     _behaviorSegmentRomEnd,   _behaviorSegmentBssStart,     _behaviorSegmentBssEnd),
     ALLOC_LEVEL_POOL(),
+    LOAD_MODEL_FROM_GEO(MODEL_ON_OFF_BLOCK, on_off_block_geo),
     LOAD_MODEL_FROM_GEO(MODEL_JUMP_PLANE, jump_plane_geo),
     LOAD_MODEL_FROM_GEO(MODEL_DIRECTION_PLATE, direction_plate_geo),
     LOAD_MODEL_FROM_GEO(MODEL_TURN_PLANE, turn_plane_geo),

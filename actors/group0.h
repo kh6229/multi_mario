@@ -367,4 +367,8 @@ extern const Gfx white_particle_small_unused_dl[];
 
 #include "jump_plane/geo_header.h"
 
+#include "on_off_block/collision_header.h"
+
+#include "on_off_block/geo_header.h"
+
 #endif

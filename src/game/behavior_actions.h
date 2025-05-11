@@ -562,6 +562,8 @@ void bhv_mini_mario_button_loop(void);
 void bhv_turn_plane_loop(void);
 void bhv_turn_plane_init(void);
 void bhv_direction_plate_loop(void);
+void bhv_jump_plane_loop(void);
+void bhv_jump_plane_init(void);
 
 Gfx *geo_move_mario_part_from_parent(s32 callContext, UNUSED struct GraphNode *node, Mat4 mtx);
 

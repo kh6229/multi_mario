@@ -17,6 +17,35 @@ void bhv_direction_plate_loop(void) {
     
 }
 
+void bhv_jump_plane_loop(void) {
+    switch (o->oAction) {
+        case 0: 
+            o->oAction = 1;
+            break;
+        
+        case 1:
+            if (o->oJumpPlaneType == JUMP_PLANE_TYPE_PURPLE_SWITCH) {
+                struct Object * switchObj = cur_obj_nearest_object_with_behavior(bhvFloorSwitchHiddenObjects);
+                if (switchObj != NULL && switchObj->oAction == PURPLE_SWITCH_ACT_TICKING) {
+                    cur_obj_become_tangible();
+                    cur_obj_enable_rendering();
+                    load_object_collision_model();
+                } else {
+                    cur_obj_become_intangible();
+                    cur_obj_disable_rendering();
+                }
+            } else {
+                load_object_collision_model();
+            }
+            break;
+    }
+}
+
+void bhv_jump_plane_init(void) {
+    o->oJumpPlaneType = o->oBehParams2ndByte;
+    o->oAction = 1;
+}
+
 void bhv_turn_plane_loop(void) {
     switch (o->oAction) {
         case 0:
@@ -32,6 +61,20 @@ void bhv_turn_plane_loop(void) {
             break;
 
         case 1:
+            if (o->oTurnPlaneType == TURN_PLANE_TYPE_PURPLE_SWITCH) {
+                struct Object *switchObj = cur_obj_nearest_object_with_behavior(bhvFloorSwitchHiddenObjects);
+                if (switchObj != NULL && switchObj->oAction == PURPLE_SWITCH_ACT_TICKING) {
+                    cur_obj_become_tangible();
+                    cur_obj_enable_rendering();
+                    load_object_collision_model();
+                } else {
+                    cur_obj_become_intangible();
+                    cur_obj_disable_rendering();
+                }
+            } else {
+                load_object_collision_model();
+            }
+
             if (o->oTurnPlaneType != TURN_PLANE_TYPE_STAY) {
                 if (o->oTurnPlaneMariosTurned >= o->oTurnPlaneMiniMarioCount) {
                     switch (o->oTurnPlaneType) {

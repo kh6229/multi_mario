@@ -28,3 +28,4 @@
 #include "turn_plane/geo.inc.c"
 #include "direction_plate/geo.inc.c"
 #include "jump_plane/geo.inc.c"
+#include "on_off_block/geo.inc.c"

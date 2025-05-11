@@ -2677,15 +2677,15 @@ enum animIDsFirePiranhaPlant {
     #define TURN_PLANE_TYPE_STAY                            0x0
     #define TURN_PLANE_TYPE_180                             0x1
     #define TURN_PLANE_TYPE_DELETE                          0x2
-    #define TURN_PLANE_PURPLE_SWITCH                        0x3
-    #define TURN_PLANE_RED                                  0x4
-    #define TURN_PLANE_BLUE                                 0x5
+    #define TURN_PLANE_TYPE_PURPLE_SWITCH                   0x3
+    #define TURN_PLANE_TYPE_RED                             0x4
+    #define TURN_PLANE_TYPE_BLUE                            0x5
 
 /* Jump Plane */
     /* oBehParams2ndByte */
-    #define JUMP_PLANE_PURPLE_SWITCH                        0x3
-    #define JUMP_PLANE_RED                                  0x4
-    #define JUMP_PLANE_BLUE                                 0x5
+    #define JUMP_PLANE_TYPE_PURPLE_SWITCH                   0x3
+    #define JUMP_PLANE_TYPE_RED                             0x4
+    #define JUMP_PLANE_TYPE_BLUE                            0x5
 
 /* Dirt Particle */
 enum oAnimStatesTinyDirtParticle {
