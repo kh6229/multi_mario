@@ -44,6 +44,7 @@ const LevelScript level_pss_entry[] = {
 		OBJECT(MODEL_NONE, 0, -193, 1429, 0, 0, 0, (0x0A << 24) | (0x02 << 16), bhvWarp),
 		OBJECT(MODEL_DIRECTION_PLATE, -2000, 0, 2000, 0, 0, 0, 0x00000000, bhvDirectionPlate),
 		MARIO_POS(0x01, 0, 0, 80, 0),
+		OBJECT(MODEL_ON_OFF_BLOCK, 1125, 356, 0, 0, 0, 0, 0x00000000, bhvOnOffBlock),
 		OBJECT(MODEL_NONE, 0, 100, 0, 0, 0, 0, (0x0A << 16), bhvSpinAirborneWarp),
 		TERRAIN(pss_area_1_collision),
 		MACRO_OBJECTS(pss_area_1_macro_objs),

@@ -4,6 +4,8 @@
 #define MODEL_NONE                             0x00
 
 /* fast64 object exports get inserted here */
+#define MODEL_BLUE_BLOCK                  235
+#define MODEL_RED_BLOCK                   234
 #define MODEL_ON_OFF_BLOCK                233
 #define MODEL_JUMP_PLANE                  232
 #define MODEL_DIRECTION_PLATE             231

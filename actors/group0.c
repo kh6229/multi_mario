@@ -51,3 +51,7 @@
 #include "jump_plane/model.inc.c"
 #include "on_off_block/collision.inc.c"
 #include "on_off_block/model.inc.c"
+#include "red_block/collision.inc.c"
+#include "red_block/model.inc.c"
+#include "blue_block/collision.inc.c"
+#include "blue_block/model.inc.c"

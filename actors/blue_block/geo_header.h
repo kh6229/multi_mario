@@ -1,0 +1,14 @@
+extern const GeoLayout blue_block_Switch_opt1[];
+extern const GeoLayout blue_block_geo[];
+extern u8 blue_block_blue_transparent_ci4[];
+extern u8 blue_block_blue_transparent_pal_rgba16[];
+extern u8 blue_block_blue_opaque_ci8[];
+extern u8 blue_block_blue_opaque_pal_rgba16[];
+extern Vtx blue_block_Switch_Option_1_mesh_layer_5_vtx_0[20];
+extern Gfx blue_block_Switch_Option_1_mesh_layer_5_tri_0[];
+extern Gfx mat_blue_block_f3dlite_material_009[];
+extern Gfx mat_revert_blue_block_f3dlite_material_009[];
+extern Gfx mat_blue_block_f3dlite_material[];
+extern Gfx mat_revert_blue_block_f3dlite_material[];
+extern Gfx blue_block_Switch_Option_1_mesh_layer_5[];
+extern Gfx blue_block_Switch_Option_1_mesh_layer_5_mat_override_f3dlite_material_0[];

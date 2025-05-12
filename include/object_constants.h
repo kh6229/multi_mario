@@ -2687,6 +2687,17 @@ enum animIDsFirePiranhaPlant {
     #define JUMP_PLANE_TYPE_RED                             0x4
     #define JUMP_PLANE_TYPE_BLUE                            0x5
 
+/* On Off Block */
+    /* oOnOffBlockState */
+    #define ON_OFF_BLOCK_STATE_RED                          0x0
+    #define ON_OFF_BLOCK_STATE_BLUE                         0x1
+
+enum oAnimStatesOnOffBlock {
+    ON_OFF_BLOCK_ANIM_STATE_RED,
+    ON_OFF_BLOCK_ANIM_STATE_BLUE
+};
+
+
 /* Dirt Particle */
 enum oAnimStatesTinyDirtParticle {
     TINY_DIRT_PARTICLE_ANIM_STATE_RED,

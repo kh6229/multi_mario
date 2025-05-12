@@ -1,7 +1,14 @@
+extern const GeoLayout on_off_block_Switch_opt1[];
 extern const GeoLayout on_off_block_geo[];
-extern Vtx on_off_block_Cube_mesh_layer_1_vtx_cull[8];
-extern Vtx on_off_block_Cube_mesh_layer_1_vtx_0[14];
-extern Gfx on_off_block_Cube_mesh_layer_1_tri_0[];
+extern u8 on_off_block_on_block_ci4[];
+extern u8 on_off_block_on_block_pal_rgba16[];
+extern u8 on_off_block_off_block_ci4[];
+extern u8 on_off_block_off_block_pal_rgba16[];
+extern Vtx on_off_block_switch_option_1_mesh_layer_1_vtx_0[20];
+extern Gfx on_off_block_switch_option_1_mesh_layer_1_tri_0[];
 extern Gfx mat_on_off_block_f3dlite_material_007[];
 extern Gfx mat_revert_on_off_block_f3dlite_material_007[];
-extern Gfx on_off_block_Cube_mesh_layer_1[];
+extern Gfx mat_on_off_block_f3dlite_material[];
+extern Gfx mat_revert_on_off_block_f3dlite_material[];
+extern Gfx on_off_block_switch_option_1_mesh_layer_1[];
+extern Gfx on_off_block_switch_option_1_mesh_layer_1_mat_override_f3dlite_material_0[];

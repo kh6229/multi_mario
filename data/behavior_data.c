@@ -6190,3 +6190,12 @@ const BehaviorScript bhvJumpPlane [] = {
         CALL_NATIVE(bhv_jump_plane_loop),
     END_LOOP(),
 };
+
+const BehaviorScript bhvOnOffBlock [] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_COLLISION_DATA(on_off_block_collision),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_on_off_block_loop),
+    END_LOOP(),
+};

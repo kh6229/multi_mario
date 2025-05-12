@@ -780,3 +780,4 @@ UNUSED s32 debug_sequence_tracker(s16 debugInputSequence[]) {
 #include "behaviors/end_gate.inc.c"
 #include "behaviors/text_trigger.inc.c"
 #include "behaviors/turn_plane.inc.c"
+#include "behaviors/on_off_block.inc.c"

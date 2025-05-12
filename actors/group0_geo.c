@@ -29,3 +29,5 @@
 #include "direction_plate/geo.inc.c"
 #include "jump_plane/geo.inc.c"
 #include "on_off_block/geo.inc.c"
+#include "red_block/geo.inc.c"
+#include "blue_block/geo.inc.c"

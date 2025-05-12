@@ -552,5 +552,6 @@ extern const BehaviorScript bhvMiniMarioButton[];
 extern const BehaviorScript bhvTurnPlane[];
 extern const BehaviorScript bhvDirectionPlate[];
 extern const BehaviorScript bhvJumpPlane[];
+extern const BehaviorScript bhvOnOffBlock[];
 
 #endif // BEHAVIOR_DATA_H
