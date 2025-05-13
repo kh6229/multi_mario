@@ -2697,6 +2697,20 @@ enum oAnimStatesOnOffBlock {
     ON_OFF_BLOCK_ANIM_STATE_BLUE
 };
 
+/* Colored Block */
+    /* oColoredBlockColor */
+    #define COLORED_BLOCK_RED                               0x0
+    #define COLORED_BLOCK_BLUE                              0x1
+
+    /* oColoredBlockState */
+    #define COLORED_BLOCK_TRANSPARENT                       0x0
+    #define COLORED_BLOCK_SOLID                             0x1
+
+enum oAnimStatesColoredBlock {
+    COLORED_BLOCK_ANIM_STATE_TRANSPARENT,
+    COLORED_BLOCK_ANIM_STATE_SOLID
+};
+
 
 /* Dirt Particle */
 enum oAnimStatesTinyDirtParticle {

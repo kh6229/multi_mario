@@ -10,7 +10,7 @@ const GeoLayout red_block_Switch_opt1[] = {
 const GeoLayout red_block_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
-		GEO_SWITCH_CASE(0, geo_switch_red_block),
+		GEO_SWITCH_CASE(0, geo_switch_colored_block),
 		GEO_OPEN_NODE(),
 			GEO_NODE_START(),
 			GEO_OPEN_NODE(),

@@ -211,7 +211,7 @@ Gfx mat_revert_on_off_block_f3dlite_material_007[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_on_off_block_f3dlite_material[] = {
+Gfx mat_on_off_block_f3dlite_material_008[] = {
 	gsSPLightColor(LIGHT_1, 0xFFFFFFFF),
 	gsSPLightColor(LIGHT_2, 0x7F7F7FFF),
 	gsDPPipeSync(),
@@ -230,7 +230,7 @@ Gfx mat_on_off_block_f3dlite_material[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_revert_on_off_block_f3dlite_material[] = {
+Gfx mat_revert_on_off_block_f3dlite_material_008[] = {
 	gsDPPipeSync(),
 	gsDPSetAlphaDither(G_AD_DISABLE),
 	gsDPSetTextureLUT(G_TT_NONE),
@@ -251,10 +251,10 @@ Gfx on_off_block_switch_option_1_mesh_layer_1[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx on_off_block_switch_option_1_mesh_layer_1_mat_override_f3dlite_material_0[] = {
-	gsSPDisplayList(mat_on_off_block_f3dlite_material),
+Gfx on_off_block_switch_option_1_mesh_layer_1_mat_override_f3dlite_material_008_0[] = {
+	gsSPDisplayList(mat_on_off_block_f3dlite_material_008),
 	gsSPDisplayList(on_off_block_switch_option_1_mesh_layer_1_tri_0),
-	gsSPDisplayList(mat_revert_on_off_block_f3dlite_material),
+	gsSPDisplayList(mat_revert_on_off_block_f3dlite_material_008),
 	gsDPPipeSync(),
 	gsSPSetGeometryMode(G_LIGHTING),
 	gsSPClearGeometryMode(G_TEXTURE_GEN),

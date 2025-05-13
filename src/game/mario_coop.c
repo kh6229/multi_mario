@@ -187,7 +187,7 @@ void coop_npc_floor_turn(struct MarioState * m, s16 yaw) {
     if (m->turnCooldown == 0) {
         m->faceAngle[1] += yaw;
         m->intendedYaw = m->faceAngle[1];
-        m->turnCooldown = 30;
+        m->turnCooldown = 15;
     }
     m->npcState = NPC_STATE_WALKING;
 }
@@ -197,7 +197,7 @@ void coop_npc_plate_turn(struct MarioState * m, s16 yaw) {
     if (m->turnCooldown == 0) {
         m->faceAngle[1] = yaw;
         m->intendedYaw = m->faceAngle[1];
-        m->turnCooldown = 30;
+        m->turnCooldown = 15;
     }
     m->npcState = NPC_STATE_WALKING;
 }

@@ -553,5 +553,7 @@ extern const BehaviorScript bhvTurnPlane[];
 extern const BehaviorScript bhvDirectionPlate[];
 extern const BehaviorScript bhvJumpPlane[];
 extern const BehaviorScript bhvOnOffBlock[];
+extern const BehaviorScript bhvRedBlock[];
+extern const BehaviorScript bhvBlueBlock[];
 
 #endif // BEHAVIOR_DATA_H

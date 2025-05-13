@@ -565,6 +565,7 @@ void bhv_direction_plate_loop(void);
 void bhv_jump_plane_loop(void);
 void bhv_jump_plane_init(void);
 void bhv_on_off_block_loop(void);
+void bhv_colored_block_loop(void);
 
 Gfx *geo_move_mario_part_from_parent(s32 callContext, UNUSED struct GraphNode *node, Mat4 mtx);
 
@@ -587,6 +588,7 @@ Gfx *geo_snufit_scale_body(s32 callContext, struct GraphNode *node, UNUSED Mat4 
 Gfx *geo_scale_bowser_key(s32 callContext, struct GraphNode *node, UNUSED Mat4 mtx);
 
 Gfx *geo_switch_on_off_block(s32 callContext, struct GraphNode *node, UNUSED Mat4 *mtx);
+Gfx *geo_switch_colored_block(s32 callContext, struct GraphNode *node, UNUSED Mat4 *mtx);\
 
 // Water splash
 extern struct WaterDropletParams gShallowWaterSplashDropletParams;

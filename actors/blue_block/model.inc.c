@@ -218,26 +218,26 @@ u8 blue_block_blue_opaque_pal_rgba16[] = {
 };
 
 Vtx blue_block_Switch_Option_1_mesh_layer_5_vtx_0[20] = {
-	{{ {-100, 0, 100}, 0, {-16, 1008}, {183, 183, 73, 255} }},
-	{{ {-100, 200, 100}, 0, {1008, 1008}, {183, 73, 73, 255} }},
-	{{ {-100, 200, -100}, 0, {1008, -16}, {183, 73, 183, 255} }},
-	{{ {-100, 0, -100}, 0, {-16, -16}, {183, 183, 183, 255} }},
-	{{ {100, 0, 100}, 0, {-16, 1008}, {73, 183, 73, 255} }},
-	{{ {-100, 200, 100}, 0, {1008, -16}, {183, 73, 73, 255} }},
-	{{ {-100, 0, 100}, 0, {-16, -16}, {183, 183, 73, 255} }},
-	{{ {100, 200, 100}, 0, {1008, 1008}, {73, 73, 73, 255} }},
-	{{ {-100, 0, -100}, 0, {-16, 1008}, {183, 183, 183, 255} }},
-	{{ {100, 0, 100}, 0, {1008, -16}, {73, 183, 73, 255} }},
-	{{ {100, 0, -100}, 0, {1008, 1008}, {73, 183, 183, 255} }},
-	{{ {100, 200, -100}, 0, {-16, 1008}, {73, 73, 183, 255} }},
-	{{ {-100, 200, -100}, 0, {1008, 1008}, {183, 73, 183, 255} }},
-	{{ {100, 200, 100}, 0, {-16, -16}, {73, 73, 73, 255} }},
-	{{ {100, 200, -100}, 0, {1008, -16}, {73, 73, 183, 255} }},
-	{{ {100, 0, -100}, 0, {-16, -16}, {73, 183, 183, 255} }},
-	{{ {100, 0, -100}, 0, {-16, 1008}, {73, 183, 183, 255} }},
-	{{ {100, 200, 100}, 0, {1008, -16}, {73, 73, 73, 255} }},
-	{{ {100, 0, 100}, 0, {-16, -16}, {73, 183, 73, 255} }},
-	{{ {100, 200, -100}, 0, {1008, 1008}, {73, 73, 183, 255} }},
+	{{ {-90, 0, 90}, 0, {-16, 1008}, {183, 183, 73, 255} }},
+	{{ {-90, 180, 90}, 0, {1008, 1008}, {183, 73, 73, 255} }},
+	{{ {-90, 180, -90}, 0, {1008, -16}, {183, 73, 183, 255} }},
+	{{ {-90, 0, -90}, 0, {-16, -16}, {183, 183, 183, 255} }},
+	{{ {90, 0, 90}, 0, {-16, 1008}, {73, 183, 73, 255} }},
+	{{ {-90, 180, 90}, 0, {1008, -16}, {183, 73, 73, 255} }},
+	{{ {-90, 0, 90}, 0, {-16, -16}, {183, 183, 73, 255} }},
+	{{ {90, 180, 90}, 0, {1008, 1008}, {73, 73, 73, 255} }},
+	{{ {-90, 0, -90}, 0, {-16, 1008}, {183, 183, 183, 255} }},
+	{{ {90, 0, 90}, 0, {1008, -16}, {73, 183, 73, 255} }},
+	{{ {90, 0, -90}, 0, {1008, 1008}, {73, 183, 183, 255} }},
+	{{ {90, 180, -90}, 0, {-16, 1008}, {73, 73, 183, 255} }},
+	{{ {-90, 180, -90}, 0, {1008, 1008}, {183, 73, 183, 255} }},
+	{{ {90, 180, 90}, 0, {-16, -16}, {73, 73, 73, 255} }},
+	{{ {90, 180, -90}, 0, {1008, -16}, {73, 73, 183, 255} }},
+	{{ {90, 0, -90}, 0, {-16, -16}, {73, 183, 183, 255} }},
+	{{ {90, 0, -90}, 0, {-16, 1008}, {73, 183, 183, 255} }},
+	{{ {90, 180, 90}, 0, {1008, -16}, {73, 73, 73, 255} }},
+	{{ {90, 0, 90}, 0, {-16, -16}, {73, 183, 73, 255} }},
+	{{ {90, 180, -90}, 0, {1008, 1008}, {73, 73, 183, 255} }},
 };
 
 Gfx blue_block_Switch_Option_1_mesh_layer_5_tri_0[] = {
@@ -278,9 +278,9 @@ Gfx mat_revert_blue_block_f3dlite_material_009[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_blue_block_f3dlite_material[] = {
+Gfx mat_blue_block_f3dlite_material_012[] = {
 	gsSPLightColor(LIGHT_1, 0xFFFFFFFF),
-	gsSPLightColor(LIGHT_2, 0xA16868FF),
+	gsSPLightColor(LIGHT_2, 0x686BA1FF),
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, ENVIRONMENT, TEXEL0, 0, SHADE, 0, 0, 0, 0, ENVIRONMENT),
 	gsDPSetAlphaDither(G_AD_NOISE),
@@ -297,7 +297,7 @@ Gfx mat_blue_block_f3dlite_material[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_revert_blue_block_f3dlite_material[] = {
+Gfx mat_revert_blue_block_f3dlite_material_012[] = {
 	gsDPPipeSync(),
 	gsDPSetAlphaDither(G_AD_DISABLE),
 	gsDPSetTextureLUT(G_TT_NONE),
@@ -318,10 +318,10 @@ Gfx blue_block_Switch_Option_1_mesh_layer_5[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx blue_block_Switch_Option_1_mesh_layer_5_mat_override_f3dlite_material_0[] = {
-	gsSPDisplayList(mat_blue_block_f3dlite_material),
+Gfx blue_block_Switch_Option_1_mesh_layer_5_mat_override_f3dlite_material_012_0[] = {
+	gsSPDisplayList(mat_blue_block_f3dlite_material_012),
 	gsSPDisplayList(blue_block_Switch_Option_1_mesh_layer_5_tri_0),
-	gsSPDisplayList(mat_revert_blue_block_f3dlite_material),
+	gsSPDisplayList(mat_revert_blue_block_f3dlite_material_012),
 	gsDPPipeSync(),
 	gsSPSetGeometryMode(G_LIGHTING),
 	gsSPClearGeometryMode(G_TEXTURE_GEN),

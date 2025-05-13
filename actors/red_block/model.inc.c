@@ -222,26 +222,26 @@ u8 red_block_red_opaque_pal_rgba16[] = {
 };
 
 Vtx red_block_Switch_Option_1_mesh_layer_5_vtx_0[20] = {
-	{{ {-100, 0, 100}, 0, {-16, 1008}, {183, 183, 73, 255} }},
-	{{ {-100, 200, 100}, 0, {1008, 1008}, {183, 73, 73, 255} }},
-	{{ {-100, 200, -100}, 0, {1008, -16}, {183, 73, 183, 255} }},
-	{{ {-100, 0, -100}, 0, {-16, -16}, {183, 183, 183, 255} }},
-	{{ {100, 0, 100}, 0, {-16, 1008}, {73, 183, 73, 255} }},
-	{{ {-100, 200, 100}, 0, {1008, -16}, {183, 73, 73, 255} }},
-	{{ {-100, 0, 100}, 0, {-16, -16}, {183, 183, 73, 255} }},
-	{{ {100, 200, 100}, 0, {1008, 1008}, {73, 73, 73, 255} }},
-	{{ {-100, 0, -100}, 0, {-16, 1008}, {183, 183, 183, 255} }},
-	{{ {100, 0, 100}, 0, {1008, -16}, {73, 183, 73, 255} }},
-	{{ {100, 0, -100}, 0, {1008, 1008}, {73, 183, 183, 255} }},
-	{{ {100, 200, -100}, 0, {-16, 1008}, {73, 73, 183, 255} }},
-	{{ {-100, 200, -100}, 0, {1008, 1008}, {183, 73, 183, 255} }},
-	{{ {100, 200, 100}, 0, {-16, -16}, {73, 73, 73, 255} }},
-	{{ {100, 200, -100}, 0, {1008, -16}, {73, 73, 183, 255} }},
-	{{ {100, 0, -100}, 0, {-16, -16}, {73, 183, 183, 255} }},
-	{{ {100, 0, -100}, 0, {-16, 1008}, {73, 183, 183, 255} }},
-	{{ {100, 200, 100}, 0, {1008, -16}, {73, 73, 73, 255} }},
-	{{ {100, 0, 100}, 0, {-16, -16}, {73, 183, 73, 255} }},
-	{{ {100, 200, -100}, 0, {1008, 1008}, {73, 73, 183, 255} }},
+	{{ {-90, 0, 90}, 0, {-16, 1008}, {183, 183, 73, 255} }},
+	{{ {-90, 180, 90}, 0, {1008, 1008}, {183, 73, 73, 255} }},
+	{{ {-90, 180, -90}, 0, {1008, -16}, {183, 73, 183, 255} }},
+	{{ {-90, 0, -90}, 0, {-16, -16}, {183, 183, 183, 255} }},
+	{{ {90, 0, 90}, 0, {-16, 1008}, {73, 183, 73, 255} }},
+	{{ {-90, 180, 90}, 0, {1008, -16}, {183, 73, 73, 255} }},
+	{{ {-90, 0, 90}, 0, {-16, -16}, {183, 183, 73, 255} }},
+	{{ {90, 180, 90}, 0, {1008, 1008}, {73, 73, 73, 255} }},
+	{{ {-90, 0, -90}, 0, {-16, 1008}, {183, 183, 183, 255} }},
+	{{ {90, 0, 90}, 0, {1008, -16}, {73, 183, 73, 255} }},
+	{{ {90, 0, -90}, 0, {1008, 1008}, {73, 183, 183, 255} }},
+	{{ {90, 180, -90}, 0, {-16, 1008}, {73, 73, 183, 255} }},
+	{{ {-90, 180, -90}, 0, {1008, 1008}, {183, 73, 183, 255} }},
+	{{ {90, 180, 90}, 0, {-16, -16}, {73, 73, 73, 255} }},
+	{{ {90, 180, -90}, 0, {1008, -16}, {73, 73, 183, 255} }},
+	{{ {90, 0, -90}, 0, {-16, -16}, {73, 183, 183, 255} }},
+	{{ {90, 0, -90}, 0, {-16, 1008}, {73, 183, 183, 255} }},
+	{{ {90, 180, 90}, 0, {1008, -16}, {73, 73, 73, 255} }},
+	{{ {90, 0, 90}, 0, {-16, -16}, {73, 183, 73, 255} }},
+	{{ {90, 180, -90}, 0, {1008, 1008}, {73, 73, 183, 255} }},
 };
 
 Gfx red_block_Switch_Option_1_mesh_layer_5_tri_0[] = {
@@ -256,7 +256,7 @@ Gfx red_block_Switch_Option_1_mesh_layer_5_tri_0[] = {
 };
 
 
-Gfx mat_red_block_f3dlite_material_009[] = {
+Gfx mat_red_block_f3dlite_material_010[] = {
 	gsSPGeometryMode(G_CULL_BACK, 0),
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(0, 0, 0, TEXEL0, 0, 0, 0, TEXEL0, 0, 0, 0, TEXEL0, 0, 0, 0, TEXEL0),
@@ -274,7 +274,7 @@ Gfx mat_red_block_f3dlite_material_009[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_revert_red_block_f3dlite_material_009[] = {
+Gfx mat_revert_red_block_f3dlite_material_010[] = {
 	gsSPGeometryMode(0, G_CULL_BACK),
 	gsDPPipeSync(),
 	gsDPSetAlphaDither(G_AD_DISABLE),
@@ -284,7 +284,7 @@ Gfx mat_revert_red_block_f3dlite_material_009[] = {
 
 Gfx mat_red_block_f3dlite_material[] = {
 	gsSPLightColor(LIGHT_1, 0xFFFFFFFF),
-	gsSPLightColor(LIGHT_2, 0xA16868FF),
+	gsSPLightColor(LIGHT_2, 0x7F5C5CFF),
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, ENVIRONMENT, TEXEL0, 0, SHADE, 0, 0, 0, 0, ENVIRONMENT),
 	gsDPSetAlphaDither(G_AD_NOISE),
@@ -309,9 +309,9 @@ Gfx mat_revert_red_block_f3dlite_material[] = {
 };
 
 Gfx red_block_Switch_Option_1_mesh_layer_5[] = {
-	gsSPDisplayList(mat_red_block_f3dlite_material_009),
+	gsSPDisplayList(mat_red_block_f3dlite_material_010),
 	gsSPDisplayList(red_block_Switch_Option_1_mesh_layer_5_tri_0),
-	gsSPDisplayList(mat_revert_red_block_f3dlite_material_009),
+	gsSPDisplayList(mat_revert_red_block_f3dlite_material_010),
 	gsDPPipeSync(),
 	gsSPSetGeometryMode(G_LIGHTING),
 	gsSPClearGeometryMode(G_TEXTURE_GEN),
